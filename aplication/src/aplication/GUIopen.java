@@ -8,6 +8,7 @@ package aplication;
 import java.io.File;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  *
@@ -49,7 +50,7 @@ public class GUIopen extends javax.swing.JFrame {
         CodonDropDown = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Open file");
 
         buttonGroup1.add(PreviusRadioButton);
         PreviusRadioButton.setText("Open previus file");
@@ -204,19 +205,12 @@ public class GUIopen extends javax.swing.JFrame {
         CodonDropDown.setEnabled(true);
         FileTextField.setEnabled(true);
     }//GEN-LAST:event_NewRadioButtonActionPerformed
-
+JFileChooser FileChooser;
     private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
         // TODO add your handling code here:
         // - laat de gebruiker een bestand kiezen
         // - weergeeft het gekozen bestand in het textvak
-        
-    }//GEN-LAST:event_BrowseButtonActionPerformed
-    JFileChooser FileChooser;
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // - if open previus laat logica alles ophalen uit de database en weergeven.
-        // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
-        FileChooser = new JFileChooser();
+                FileChooser = new JFileChooser();
         int reply = FileChooser.showOpenDialog(this);
             File selectFile = FileChooser.getSelectedFile();
             if (reply == JFileChooser.APPROVE_OPTION) {
@@ -224,12 +218,19 @@ public class GUIopen extends javax.swing.JFrame {
                 FileTextField.setText(selectFile.getName());
                 Logica.readFile(bestand);
             }
+    }//GEN-LAST:event_BrowseButtonActionPerformed
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        // - if open previus laat logica alles ophalen uit de database en weergeven.
+        // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void mainOpen() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
