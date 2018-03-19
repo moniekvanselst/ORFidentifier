@@ -5,6 +5,10 @@
  */
 package aplication;
 
+import java.io.File;
+import javafx.stage.FileChooser;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author van Selst
@@ -205,12 +209,21 @@ public class GUIopen extends javax.swing.JFrame {
         // TODO add your handling code here:
         // - laat de gebruiker een bestand kiezen
         // - weergeeft het gekozen bestand in het textvak
+        
     }//GEN-LAST:event_BrowseButtonActionPerformed
-
+    JFileChooser FileChooser;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         // - if open previus laat logica alles ophalen uit de database en weergeven.
         // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
+        FileChooser = new JFileChooser();
+        int reply = FileChooser.showOpenDialog(this);
+            File selectFile = FileChooser.getSelectedFile();
+            if (reply == JFileChooser.APPROVE_OPTION) {
+                String bestand = (selectFile.getAbsolutePath());
+                FileTextField.setText(selectFile.getName());
+                Logica.readFile(bestand);
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
