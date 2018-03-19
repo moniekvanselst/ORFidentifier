@@ -73,6 +73,11 @@ public class GUIopen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(InfoTextArea);
 
         BrowseButton.setText("Browse");
+        BrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BrowseButtonActionPerformed(evt);
+            }
+        });
 
         FileTextField.setText("File");
 
@@ -90,6 +95,11 @@ public class GUIopen extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Open");
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,6 +200,18 @@ public class GUIopen extends javax.swing.JFrame {
         CodonDropDown.setEnabled(true);
         FileTextField.setEnabled(true);
     }//GEN-LAST:event_NewRadioButtonActionPerformed
+
+    private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
+        // TODO add your handling code here:
+        // - laat de gebruiker een bestand kiezen
+        // - weergeeft het gekozen bestand in het textvak
+    }//GEN-LAST:event_BrowseButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        // - if open previus laat logica alles ophalen uit de database en weergeven.
+        // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
