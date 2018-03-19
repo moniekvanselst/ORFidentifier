@@ -53,7 +53,7 @@ public class GUIopen extends javax.swing.JFrame {
         setTitle("Open file");
 
         buttonGroup1.add(PreviusRadioButton);
-        PreviusRadioButton.setText("Open previus file");
+        PreviusRadioButton.setText("Open previous file");
         PreviusRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PreviusRadioButtonActionPerformed(evt);
