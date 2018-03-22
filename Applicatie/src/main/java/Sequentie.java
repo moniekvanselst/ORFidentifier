@@ -20,13 +20,13 @@ public class Sequentie {
           
     
     public Sequentie(String seq, int seqID){
-        if(seq.contains(!ATGC)){       
-    this.seq = seq;
-    this.seqID = seqID;
-    }else {JOptionPane.showMessageDialog(frame,
-    "De gegeven sequentie bestaat NIET uit DNA",
-    "Inane error",
-    JOptionPane.ERROR_MESSAGE);}
+        if(seq.contains("A"|"T"|"G"|"C")){       
+            this.seq = seq;
+            this.seqID = seqID;
+    }   else {JOptionPane.showMessageDialog(frame,
+            "De gegeven sequentie bestaat NIET uit DNA",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);}
     }
 
     public int getSeqID() {
