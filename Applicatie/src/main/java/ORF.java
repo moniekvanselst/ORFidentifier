@@ -10,5 +10,9 @@
  * @author van Selst
  */
 public class ORF {
+    private String seq;
     
+    public String getSeq(){
+        return seq;
+    }
 }

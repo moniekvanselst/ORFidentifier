@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +17,7 @@
 public class Sequentie {
     private int seqID;
     private String seq;
- 
+    private ArrayList<ORF> ORFlist;
     
           
     
