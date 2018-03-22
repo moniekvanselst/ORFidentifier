@@ -30,6 +30,10 @@ public class Logica {
             System.out.println("Er is een onbekende fout opgetreden");
         }
     }
+    
+    static void BLAST(){
+        
+    }
 
 
     
