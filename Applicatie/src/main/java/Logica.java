@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
 
 /**
  *
@@ -30,11 +28,8 @@ public class Logica {
             System.out.println("Er is een onbekende fout opgetreden");
         }
     }
-    
-    static void BLAST(){
+
+    static void BLAST() {
         
     }
-
-
-    
 }
