@@ -1,8 +1,25 @@
-Mon Mar 26 11:03:52 CEST 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Mon Mar 26 13:12:34 CEST 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Mar 26 11:04:02 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0162-618c-9e6f-ffffb4095631 
-on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORFIdentifier-DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Mon Mar 26 13:16:04 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0162-6202-82df-ffffb4095631 
+on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Loaded from file:/D:/Program%20Files/Java/jdk1.8.0_161/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_161-b12
+user.dir=D:\Program Files\Java\jdk1.8.0_161\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Mar 26 13:16:10 CEST 2018:
+Shutting down instance a816c00e-0162-6202-82df-ffffb4095631 on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Mon Mar 26 13:16:10 CEST 2018 Thread[DRDAConnThread_2,5,main] (DATABASE = ORF Identifier DB), (DRDAID = {2}), Database 'ORF Identifier DB' shutdown.
+----------------------------------------------------------------
+Mon Mar 26 13:16:14 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a65c80ac-0162-6202-82df-ffffb4095631 
+on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
 Loaded from file:/D:/Program%20Files/Java/jdk1.8.0_161/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_161-b12
