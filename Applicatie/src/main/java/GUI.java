@@ -75,6 +75,11 @@ public class GUI extends javax.swing.JFrame {
         DownloadButton.setText("Download");
 
         BLASTbutton.setText("BLAST");
+        BLASTbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BLASTbuttonActionPerformed(evt);
+            }
+        });
 
         BLASTlabel.setText("BLAST result's:");
 
@@ -168,6 +173,12 @@ public class GUI extends javax.swing.JFrame {
         GUIopen.mainOpen();
         openButton.setEnabled(false);
     }//GEN-LAST:event_openButtonActionPerformed
+
+    private void BLASTbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLASTbuttonActionPerformed
+        String seq = "AAALL";
+        String path = Logica.BLAST(seq);
+        Logica.BLASTparser(path);
+    }//GEN-LAST:event_BLASTbuttonActionPerformed
 
     /**
      * @param args the command line arguments

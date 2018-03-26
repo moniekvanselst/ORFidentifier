@@ -52,7 +52,7 @@ public class Logica {
         }
     }
 
-    static void BLAST(String seq) {
+    static String BLAST(String seq) {
         String seq2 = "MELGLGGLSTLSHCPWPRQQAPLGLSAQPALWPTLAALALLSSVAEASLGSAPRSPAPREGPPPVLASPAGHLPGGRTARWCSGRARRPPPQPSRPAPPPPAPPSALPRGGRAARAGGPGSRARAAGARGCRLRSQLVPVRALGLGHRSDELVRFRFCSGSCRRARSPHDLSLASLLGAGALRPPPGSRPVSQPCCRPTRYEAVSFMDVNSTWRTVDRLSATACGCLG";
         
         NCBIQBlastService service = new NCBIQBlastService();
@@ -82,6 +82,7 @@ public class Logica {
 
             // write blast output to specified file
             File f = new File("BLAST_OUTPUT_FILE.txt");
+            String path = f.getAbsolutePath();
             System.out.println("Saving query results in file " + f.getAbsolutePath());
             writer = new FileWriter(f);
 
@@ -89,9 +90,12 @@ public class Logica {
             while ((line = reader.readLine()) != null) {
                 writer.write(line + System.getProperty("line.separator"));
             }
+            
+            return path;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return " ";
         } finally {
             // clean up
             IOUtils.close(writer);
@@ -99,18 +103,22 @@ public class Logica {
 
             // delete given alignment results from blast server (optional operation)
             service.sendDeleteRequest(rid);
+            
         }
     }
 
     // verander bastands naam
-    static void BLASTparser() {
+    static void BLASTparser(String path) {
         try {
-            File inputFile = new File("C:\\Users\\van Selst\\Documents\\blok 7\\basttest2\\blastres.txt");
+            File inputFile = new File(path);
             SAXBuilder saxBuilder = new SAXBuilder();
             Document document = saxBuilder.build(inputFile);
             System.out.println("Root element :" + document.getRootElement().getName());
             Element classElement = document.getRootElement();
-            List<Element> hitList = classElement.getChildren();
+            Element blastoutput_iteration = classElement.getChild("BlastOutput_iterations");
+            Element iteration = blastoutput_iteration.getChild("Iteration");
+            Element iteration_hits = iteration.getChild("Iteration_hits");    
+            List<Element> hitList = iteration_hits.getChildren();
             System.out.println("----------------------------");
 
             for (int temp = 0; temp < hitList.size(); temp++) {
@@ -122,11 +130,16 @@ public class Logica {
                 float eindEiwit = Float.parseFloat(hsp.getChild("Hsp_query-to").getText());
                 float lenkte = Float.parseFloat(hit.getChild("Hit_len").getText());
                 float coverage = startEiwit - eindEiwit / lenkte * 100;
-
+                
+                String id = hit.getChild("Hit_id").getText();
+                String[] idlist = id.split("\\|");
+                System.out.println("org:"+idlist[4]);
+                
                 System.out.println("\nCurrent Element :"
                         + hit.getName());
                 System.out.println("hit nr. : "
                         + hit.getChild("Hit_num").getText());
+                System.out.println("organism: "+idlist[4]);
                 System.out.println("start eiwit: "
                         + hsp.getChild("Hsp_query-from").getText());
                 System.out.println("eind eiwit : "
