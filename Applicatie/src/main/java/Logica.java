@@ -44,6 +44,7 @@ public class Logica {
             while ((line = infile.readLine()) != null) {
                 String[] splitline = line.split("\n", -1);
                 //Sequentie seqObject = new Sequentie(splitline[1]);
+
             }
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
             System.out.println("Het gekozen bestand kan niet gelezen worden");
@@ -54,7 +55,7 @@ public class Logica {
 
     static String BLAST(String seq) {
         String seq2 = "MELGLGGLSTLSHCPWPRQQAPLGLSAQPALWPTLAALALLSSVAEASLGSAPRSPAPREGPPPVLASPAGHLPGGRTARWCSGRARRPPPQPSRPAPPPPAPPSALPRGGRAARAGGPGSRARAAGARGCRLRSQLVPVRALGLGHRSDELVRFRFCSGSCRRARSPHDLSLASLLGAGALRPPPGSRPVSQPCCRPTRYEAVSFMDVNSTWRTVDRLSATACGCLG";
-        
+
         NCBIQBlastService service = new NCBIQBlastService();
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         props.setBlastProgram(BlastProgramEnum.blastp);
@@ -90,7 +91,7 @@ public class Logica {
             while ((line = reader.readLine()) != null) {
                 writer.write(line + System.getProperty("line.separator"));
             }
-            
+
             return path;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -103,7 +104,7 @@ public class Logica {
 
             // delete given alignment results from blast server (optional operation)
             service.sendDeleteRequest(rid);
-            
+
         }
     }
 
@@ -117,7 +118,7 @@ public class Logica {
             Element classElement = document.getRootElement();
             Element blastoutput_iteration = classElement.getChild("BlastOutput_iterations");
             Element iteration = blastoutput_iteration.getChild("Iteration");
-            Element iteration_hits = iteration.getChild("Iteration_hits");    
+            Element iteration_hits = iteration.getChild("Iteration_hits");
             List<Element> hitList = iteration_hits.getChildren();
             System.out.println("----------------------------");
 
@@ -130,31 +131,23 @@ public class Logica {
                 float eindEiwit = Float.parseFloat(hsp.getChild("Hsp_query-to").getText());
                 float lenkte = Float.parseFloat(hit.getChild("Hit_len").getText());
                 float coverage = startEiwit - eindEiwit / lenkte * 100;
-                
+
                 String id = hit.getChild("Hit_id").getText();
                 String[] idlist = id.split("\\|");
-                System.out.println("org:"+idlist[4]);
-                
-                System.out.println("\nCurrent Element :"
-                        + hit.getName());
-                System.out.println("hit nr. : "
-                        + hit.getChild("Hit_num").getText());
-                System.out.println("organism: "+idlist[4]);
-                System.out.println("start eiwit: "
-                        + hsp.getChild("Hsp_query-from").getText());
-                System.out.println("eind eiwit : "
-                        + hsp.getChild("Hsp_query-to").getText());
-                System.out.println("sequentie nieuw?? : "
-                        + hsp.getChild("Hsp_hseq").getText());
-                System.out.println("e-value : "
-                        + hsp.getChild("Hsp_evalue").getText());
-                System.out.println("coverage : " + coverage);
-
-                System.out.println("identitie : "
-                        + hsp.getChild("Hsp_identity").getText());
-                System.out.println("accesiecode : "
-                        + hit.getChild("Hit_accession").getText());
-
+                String organism = idlist[4];
+                String hitSeq = hsp.getChild("Hsp_hseq").getText();
+                String querySeq = hsp.getChild("Hsp_qseq").getText();
+                String midline = hsp.getChild("Hsp_midline").getText();
+                String Evalue = hsp.getChild("Hsp_evalue").getText();
+                String identitie = hsp.getChild("Hsp_identity").getText();
+                String accessie = hit.getChild("Hit_accession").getText();
+                String eiwitNaam = hit.getChild("Hit_def").getText();
+                        
+//                System.out.println("\nCurrent Element :"
+//                        + hit.getName());
+//                System.out.println("hit nr. : "
+//                        + hit.getChild("Hit_num").getText());
+                GUI.resultBLAST(eiwitNaam, startEiwit, eindEiwit, lenkte, coverage, organism, hitSeq, querySeq, midline,Evalue,identitie, accessie);
             }
         } catch (JDOMException e) {
             e.printStackTrace();
