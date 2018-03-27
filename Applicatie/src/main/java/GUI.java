@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
@@ -86,16 +89,7 @@ public class GUI extends javax.swing.JFrame {
 
         BLASTtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Protein name", "E-value", "Coverage", "Ident", "Accessoin"
@@ -188,12 +182,14 @@ public class GUI extends javax.swing.JFrame {
     private void BLASTbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLASTbuttonActionPerformed
         String seq = "AAALL";
         String path = Logica.BLAST(seq);
-        Logica.BLASTparser(path);
+        ArrayList<Object[]> res = Logica.BLASTparser(path);
+        DefaultTableModel model = (DefaultTableModel) BLASTtable.getModel();
+        for(Object[] row: res){
+            model.addRow(row);
+        }
     }//GEN-LAST:event_BLASTbuttonActionPerformed
 
-    public static void resultBLAST(String eiwitNaam, float startEiwit, float eindEiwit, float lenkte, float coverage, String organism, String hitSeq, String querySeq, String midline, String Evalue,String identitie, String accessie){
-        //nbv
-    }
+
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Sequentie seq1 = new Sequentie("AATTTTGGGbCC", 1);
@@ -239,7 +235,7 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BLASTbutton;
     private javax.swing.JLabel BLASTlabel;
-    private javax.swing.JTable BLASTtable;
+    javax.swing.JTable BLASTtable;
     private javax.swing.JButton DownloadButton;
     private javax.swing.JButton ORFButton;
     private javax.swing.JLabel ORFLabel;

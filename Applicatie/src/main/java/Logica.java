@@ -23,6 +23,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import org.biojava.nbio.core.sequence.io.util.IOUtils;
 import static org.biojava.nbio.ws.alignment.qblast.BlastAlignmentParameterEnum.ENTREZ_QUERY;
@@ -109,7 +112,8 @@ public class Logica {
     }
 
     // verander bastands naam
-    static void BLASTparser(String path) {
+    static ArrayList<Object[]> BLASTparser(String path) {
+        ArrayList<Object[]> table = new ArrayList<Object[]>();
         try {
             File inputFile = new File(path);
             SAXBuilder saxBuilder = new SAXBuilder();
@@ -121,7 +125,11 @@ public class Logica {
             Element iteration_hits = iteration.getChild("Iteration_hits");
             List<Element> hitList = iteration_hits.getChildren();
             System.out.println("----------------------------");
-
+            
+            
+            
+                    
+            
             for (int temp = 0; temp < hitList.size(); temp++) {
                 Element hit = hitList.get(temp);
                 Element hsps = hit.getChild("Hit_hsps");
@@ -130,7 +138,7 @@ public class Logica {
                 float startEiwit = Float.parseFloat(hsp.getChild("Hsp_query-from").getText());
                 float eindEiwit = Float.parseFloat(hsp.getChild("Hsp_query-to").getText());
                 float lenkte = Float.parseFloat(hit.getChild("Hit_len").getText());
-                float coverage = startEiwit - eindEiwit / lenkte * 100;
+                float coverage = ((eindEiwit - startEiwit) / lenkte )* 100;
 
                 String id = hit.getChild("Hit_id").getText();
                 String[] idlist = id.split("\\|");
@@ -142,17 +150,25 @@ public class Logica {
                 String identitie = hsp.getChild("Hsp_identity").getText();
                 String accessie = hit.getChild("Hit_accession").getText();
                 String eiwitNaam = hit.getChild("Hit_def").getText();
-                        
+                
+                Object[] row = {eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lenkte, organism, hitSeq, querySeq, midline};
+                table.add(row);
+
 //                System.out.println("\nCurrent Element :"
 //                        + hit.getName());
 //                System.out.println("hit nr. : "
 //                        + hit.getChild("Hit_num").getText());
-                GUI.resultBLAST(eiwitNaam, startEiwit, eindEiwit, lenkte, coverage, organism, hitSeq, querySeq, midline,Evalue,identitie, accessie);
+                
+                
             }
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        }
+        } finally{
+        return table;
     }
+    }
+    
+
 }
