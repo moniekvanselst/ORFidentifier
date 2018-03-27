@@ -141,12 +141,13 @@ public class Logica {
                 String Evalue = hsp.getChild("Hsp_evalue").getText();
                 String identitie = hsp.getChild("Hsp_identity").getText();
                 String accessie = hit.getChild("Hit_accession").getText();
-
+                String eiwitNaam = hit.getChild("Hit_def").getText();
+                        
 //                System.out.println("\nCurrent Element :"
 //                        + hit.getName());
 //                System.out.println("hit nr. : "
 //                        + hit.getChild("Hit_num").getText());
-                GUI.resultBLAST(startEiwit, eindEiwit, lenkte, coverage, organism, hitSeq, querySeq, midline,Evalue,identitie, accessie);
+                GUI.resultBLAST(eiwitNaam, startEiwit, eindEiwit, lenkte, coverage, organism, hitSeq, querySeq, midline,Evalue,identitie, accessie);
             }
         } catch (JDOMException e) {
             e.printStackTrace();

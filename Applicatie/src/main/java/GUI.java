@@ -191,7 +191,7 @@ public class GUI extends javax.swing.JFrame {
         Logica.BLASTparser(path);
     }//GEN-LAST:event_BLASTbuttonActionPerformed
 
-    public static void resultBLAST(float startEiwit, float eindEiwit, float lenkte, float coverage, String organism, String hitSeq, String querySeq, String midline, String Evalue,String identitie, String accessie){
+    public static void resultBLAST(String eiwitNaam, float startEiwit, float eindEiwit, float lenkte, float coverage, String organism, String hitSeq, String querySeq, String midline, String Evalue,String identitie, String accessie){
         //nbv
     }
     
