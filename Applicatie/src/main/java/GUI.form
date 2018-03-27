@@ -28,7 +28,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jScrollPane3" pref="616" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="ORFLabel" min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="ORFLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
@@ -113,7 +113,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="ORFLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="found ORF&apos;s"/>
+        <Property name="text" type="java.lang.String" value="Found ORF&apos;s:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ORFButton">
@@ -171,7 +171,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="BLASTlabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="BLAST result&apos;s:"/>
+        <Property name="text" type="java.lang.String" value="BLAST results:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -188,9 +188,41 @@
                 <Column editable="true" title="Protein name" type="java.lang.String"/>
                 <Column editable="true" title="E-value" type="java.lang.Long"/>
                 <Column editable="true" title="Coverage" type="java.lang.Long"/>
-                <Column editable="true" title="Ident" type="java.lang.Long"/>
-                <Column editable="true" title="Accessoin" type="java.lang.String"/>
+                <Column editable="true" title="Identity" type="java.lang.Long"/>
+                <Column editable="true" title="Accession" type="java.lang.String"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
           <AuxValues>

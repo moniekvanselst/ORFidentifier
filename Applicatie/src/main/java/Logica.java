@@ -63,7 +63,7 @@ public class Logica {
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         props.setBlastProgram(BlastProgramEnum.blastp);
         props.setBlastDatabase("swissprot");
-        props.setAlignmentOption(ENTREZ_QUERY, "\"serum albumin\"[Protein name] AND mammals[Organism]");
+        //props.setAlignmentOption(ENTREZ_QUERY,"\"serum albumin\"[Protein name] AND mammals[Organism]");
         NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
         // outputProps.setAlignmentNumber(200); // outputProps.setOutputOption(BlastOutputParameterEnum.ALIGNMENTS, “200”);
 
@@ -119,7 +119,7 @@ public class Logica {
             SAXBuilder saxBuilder = new SAXBuilder();
             Document document = saxBuilder.build(inputFile);
             System.out.println("Root element :" + document.getRootElement().getName());
-            Element classElement = document.getRootElement();
+            Element classElement = document.getRootElement();            
             Element blastoutput_iteration = classElement.getChild("BlastOutput_iterations");
             Element iteration = blastoutput_iteration.getChild("Iteration");
             Element iteration_hits = iteration.getChild("Iteration_hits");
@@ -137,8 +137,9 @@ public class Logica {
                 //System.out.println(hsp.getChildren().toString());
                 float startEiwit = Float.parseFloat(hsp.getChild("Hsp_query-from").getText());
                 float eindEiwit = Float.parseFloat(hsp.getChild("Hsp_query-to").getText());
-                float lenkte = Float.parseFloat(hit.getChild("Hit_len").getText());
-                float coverage = ((eindEiwit - startEiwit) / lenkte )* 100;
+                //float lengte = Float.parseFloat(hit.getChild("Hit_len").getText());
+                float lengte = Float.parseFloat(classElement.getChild("BlastOutput_query-len").getText());
+                float coverage = (((eindEiwit - startEiwit)+1) / lengte )* 100;
 
                 String id = hit.getChild("Hit_id").getText();
                 String[] idlist = id.split("\\|");
@@ -149,9 +150,9 @@ public class Logica {
                 String Evalue = hsp.getChild("Hsp_evalue").getText();
                 String identitie = hsp.getChild("Hsp_identity").getText();
                 String accessie = hit.getChild("Hit_accession").getText();
-                String eiwitNaam = hit.getChild("Hit_def").getText();
+                String eiwitNaam = hit.getChild("Hit_def").getText().split("=")[1].split(";")[0];
                 
-                Object[] row = {eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lenkte, organism, hitSeq, querySeq, midline};
+                Object[] row = {eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
                 table.add(row);
 
 //                System.out.println("\nCurrent Element :"

@@ -59,7 +59,7 @@ public class GUI extends javax.swing.JFrame {
 
         seqLabel.setText("Sequence:");
 
-        ORFLabel.setText("found ORF's");
+        ORFLabel.setText("Found ORF's:");
 
         ORFButton.setText("Find ORF's");
 
@@ -85,14 +85,14 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        BLASTlabel.setText("BLAST result's:");
+        BLASTlabel.setText("BLAST results:");
 
         BLASTtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Protein name", "E-value", "Coverage", "Ident", "Accessoin"
+                "Protein name", "E-value", "Coverage", "Identity", "Accession"
             }
         ) {
             Class[] types = new Class [] {
@@ -121,7 +121,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(ORFLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ORFLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(49, 49, 49)

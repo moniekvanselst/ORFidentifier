@@ -1,19 +1,14 @@
-Tue Mar 27 15:23:14 CEST 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Tue Mar 27 20:21:29 CEST 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Mar 27 15:23:14 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0162-67a0-6cb1-ffffb4095631 
-on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
-Loaded from file:/D:/Program%20Files/Java/jdk1.8.0_161/db/lib/derby.jar
+Tue Mar 27 20:21:30 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0162-68b1-8d4d-ffffb7bc2c6d 
+on database directory C:\Users\wimme\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
+Loaded from file:/F:/Program%20Files/Java/jdk1.8.0_161/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_161-b12
-user.dir=D:\Program Files\Java\jdk1.8.0_161\db
+user.dir=F:\Program Files\Java\jdk1.8.0_161\db
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database
+derby.system.home=C:\Users\wimme\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Mar 27 15:23:20 CEST 2018: Shutting down Derby engine
-----------------------------------------------------------------
-Tue Mar 27 15:23:20 CEST 2018:
-Shutting down instance a816c00e-0162-67a0-6cb1-ffffb4095631 on database directory D:\OneDrive\Documenten\NetBeansProjects\EindOpdrachtBlok7\ORFidentifier\Java Database\ORF Identifier DB with class loader sun.misc.Launcher$AppClassLoader@266474c2 
