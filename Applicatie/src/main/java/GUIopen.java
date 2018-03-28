@@ -215,8 +215,9 @@ JFileChooser FileChooser;
             File selectFile = FileChooser.getSelectedFile();
             if (reply == JFileChooser.APPROVE_OPTION) {
                 String bestand = (selectFile.getAbsolutePath());
-                FileTextField.setText(selectFile.getName());
-                Logica.readFile(bestand);
+                //FileTextField.setText(selectFile.getName());
+                FileTextField.setText(bestand);
+                
             }
     }//GEN-LAST:event_BrowseButtonActionPerformed
     
@@ -224,6 +225,11 @@ JFileChooser FileChooser;
         // TODO add your handling code here:
         // - if open previus laat logica alles ophalen uit de database en weergeven.
         // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
+        String bestand = FileTextField.getText();
+//        CodonDropDown
+//        DateTextField
+//                NameTextField
+        Logica.readFile(bestand);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

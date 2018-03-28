@@ -70,13 +70,13 @@ public class Logica {
         String rid = null;          // blast request ID
         FileWriter writer = null;
         BufferedReader reader = null;
+ 
         try {
             // send blast request and save request id
             rid = service.sendAlignmentRequest(seq2, props);
 
             // wait until results become available. Alternatively, one can do other computations/send other alignment requests
             while (!service.isReady(rid)) {
-               // GUI.waitLabel.setText("Blasting.");
                 System.out.println("Waiting for results. Sleeping for 5 seconds");
                 Thread.sleep(5000);
             }
@@ -155,12 +155,8 @@ public class Logica {
                 
                 Object[] row = {eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
                 table.add(row);
-
-//                System.out.println("\nCurrent Element :"
-//                        + hit.getName());
-//                System.out.println("hit nr. : "
-//                        + hit.getChild("Hit_num").getText());
                 
+                BLASTopslaan(eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline);
                 
             }
         } catch (JDOMException e) {
@@ -173,4 +169,12 @@ public class Logica {
     }
     
 
+    static void BLASTopslaan(String eiwitNaam ,String Evalue , float coverage,String identitie, String accessie, float startEiwit, float eindEiwit,float lengte,String organism, String hitSeq, String querySeq,String midline){
+        //zet alles in db
+    }
+    
+    static void SEQopslaan(){
+        
+    }
+            
 }
