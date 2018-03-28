@@ -55,6 +55,24 @@ public class Logica {
             System.out.println("Er is een onbekende fout opgetreden");
         }
     }
+    
+    static String[] makeFrames(){
+    String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
+    String seqframe1, seqframe2, seqframe3,seqframerev1,seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
+  
+    seqframe1= new StringBuilder( seq.substring(0,seq.length()-1)).toString();
+    seqframe2= new StringBuilder( seq.substring(1,seq.length()-1)).toString();
+    seqframe3= new StringBuilder( seq.substring(2,seq.length()-1)).toString();
+    seqframerev1= new StringBuilder( seq.substring(0,seq.length()-1)).reverse().toString();
+    seqframerev2= new StringBuilder( seq.substring(1,seq.length()-1)).reverse().toString();
+    seqframerev3= new StringBuilder( seq.substring(2,seq.length()-1)).reverse().toString();
+    seqframecomp1=seqframerev1.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+    seqframecomp2=seqframerev2.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+    seqframecomp3=seqframerev3.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+    
+    String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3};
+    return frames;
+    }
 
     static String BLAST(String seq) {
         String seq2 = "MELGLGGLSTLSHCPWPRQQAPLGLSAQPALWPTLAALALLSSVAEASLGSAPRSPAPREGPPPVLASPAGHLPGGRTARWCSGRARRPPPQPSRPAPPPPAPPSALPRGGRAARAGGPGSRARAAGARGCRLRSQLVPVRALGLGHRSDELVRFRFCSGSCRRARSPHDLSLASLLGAGALRPPPGSRPVSQPCCRPTRYEAVSFMDVNSTWRTVDRLSATACGCLG";
