@@ -53,15 +53,11 @@ public class Logica {
             String sequentie = "";
             while ((line = infile.readLine()) != null) {
                 if (!firstline) {
-                    System.out.println(line);
                     sequentie = sequentie += line;
-                    System.out.println("ja");
                 } else {
                     firstline = false;
                 }
-
             }
-            System.out.println(sequentie);
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
             JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden", "Inane error", JOptionPane.ERROR_MESSAGE);
@@ -70,8 +66,8 @@ public class Logica {
         }
     }
 
-    static HashMap<Integer, String> makeFrames() {
-        String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
+    static void makeFrames(String seq) {
+        //String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
 
         seqframe1 = new StringBuilder(seq.substring(0, seq.length() - 1)).toString();
@@ -83,7 +79,9 @@ public class Logica {
         seqframecomp1 = seqframerev1.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-
+        
+        // hier frames omzetten naar eiwitten
+        
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
         seqframeMap.put(1, seqframe1);
         seqframeMap.put(2, seqframe2);
@@ -91,12 +89,13 @@ public class Logica {
         seqframeMap.put(-1, seqframecomp1);
         seqframeMap.put(-2, seqframecomp2);
         seqframeMap.put(-3, seqframecomp3);
-        Logica.findORF(seqframeMap);
-        return seqframeMap;
+        
+        Sequentie.seqframeMap = seqframeMap;
 
     }
 
-    static void findORF(HashMap<Integer, String> seqframeMap) {
+    static void findORF() {
+        HashMap<Integer, String> seqframeMap = Sequentie.seqframeMap;
         IUPACParser iup = new IUPACParser();
         Object table = iup.getTable(1);
         int[] frames = {1, 2, 3, -1, -2, -3};

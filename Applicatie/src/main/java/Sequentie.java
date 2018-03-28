@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /*
@@ -16,6 +17,7 @@ public class Sequentie {
     private int seqID;
     private String seq;
     private ArrayList<ORF> ORFlist;
+    static public HashMap<Integer, String> seqframeMap;
 
     public Sequentie(String seq, int seqID) {
         System.out.println("dssd");
@@ -23,11 +25,13 @@ public class Sequentie {
             System.out.println("goed");
             this.seq = seq;
             this.seqID = seqID;
+            Logica.makeFrames(this.seq);
         } else {
             System.out.println("fout");
             JOptionPane.showMessageDialog(null, "De gegeven sequentie bestaat NIET uit DNA", "Inane error", JOptionPane.ERROR_MESSAGE);
 
         }
+        
     }
 
     public int getSeqID() {
