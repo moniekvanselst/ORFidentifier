@@ -62,6 +62,11 @@ public class GUI extends javax.swing.JFrame {
         ORFLabel.setText("Found ORF's:");
 
         ORFButton.setText("Find ORF's");
+        ORFButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ORFButtonActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -195,6 +200,10 @@ public class GUI extends javax.swing.JFrame {
         //Logica.makeFrames();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ORFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ORFButtonActionPerformed
+        Logica.findORF();
+    }//GEN-LAST:event_ORFButtonActionPerformed
 
     /**
      * @param args the command line arguments
