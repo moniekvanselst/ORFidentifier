@@ -8,22 +8,19 @@
  *
  * @author van Selst
  */
-public class ORF extends Sequentie {
+public class ORF {
     int frame;
     int startpositie;
     int eindpositie;
-    
-    public ORF(String seq, int seqID) {
-        super(seq, seqID);
-    }
+    String seqorf;
 
-    public ORF(int frame, int startpositie, int eindpositie, String seq, int seqID) {
-        super(seq, seqID);
+    public ORF(int frame, int startpositie, int eindpositie, String seqorf) {
         this.frame = frame;
         this.startpositie = startpositie;
         this.eindpositie = eindpositie;
+        this.seqorf = seqorf;
     }
-
+    
     public int getFrame() {
         return frame;
     }
@@ -47,6 +44,16 @@ public class ORF extends Sequentie {
     public void setEindpositie(int eindpositie) {
         this.eindpositie = eindpositie;
     }
+
+    public String getSeqorf() {
+        return seqorf;
+    }
+
+    public void setSeqorf(String seqorf) {
+        this.seqorf = seqorf;
+    }
+
+    
     
     
 }

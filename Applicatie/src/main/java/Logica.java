@@ -7,6 +7,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import org.biojava3.core.sequence.io.IUPACParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -55,23 +58,65 @@ public class Logica {
             System.out.println("Er is een onbekende fout opgetreden");
         }
     }
-    
-    static String[] makeFrames(){
-    String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
-    String seqframe1, seqframe2, seqframe3,seqframerev1,seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
-  
-    seqframe1= new StringBuilder( seq.substring(0,seq.length()-1)).toString();
-    seqframe2= new StringBuilder( seq.substring(1,seq.length()-1)).toString();
-    seqframe3= new StringBuilder( seq.substring(2,seq.length()-1)).toString();
-    seqframerev1= new StringBuilder( seq.substring(0,seq.length()-1)).reverse().toString();
-    seqframerev2= new StringBuilder( seq.substring(1,seq.length()-1)).reverse().toString();
-    seqframerev3= new StringBuilder( seq.substring(2,seq.length()-1)).reverse().toString();
-    seqframecomp1=seqframerev1.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-    seqframecomp2=seqframerev2.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-    seqframecomp3=seqframerev3.replaceAll("A","t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-    
-    String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3};
-    return frames;
+
+    static HashMap<Integer, String> makeFrames() {
+        String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
+        String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
+
+        seqframe1 = new StringBuilder(seq.substring(0, seq.length() - 1)).toString();
+        seqframe2 = new StringBuilder(seq.substring(1, seq.length() - 1)).toString();
+        seqframe3 = new StringBuilder(seq.substring(2, seq.length() - 1)).toString();
+        seqframerev1 = new StringBuilder(seq.substring(0, seq.length() - 1)).reverse().toString();
+        seqframerev2 = new StringBuilder(seq.substring(1, seq.length() - 1)).reverse().toString();
+        seqframerev3 = new StringBuilder(seq.substring(2, seq.length() - 1)).reverse().toString();
+        seqframecomp1 = seqframerev1.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+        seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+        seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
+
+        HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
+        seqframeMap.put(1, seqframe1);
+        seqframeMap.put(2, seqframe2);
+        seqframeMap.put(3, seqframe3);
+        seqframeMap.put(-1, seqframecomp1);
+        seqframeMap.put(-2, seqframecomp2);
+        seqframeMap.put(-3, seqframecomp3);
+        Logica.findORF(seqframeMap);
+        return seqframeMap;
+
+    }
+
+    static void findORF(HashMap<Integer, String> seqframeMap) {
+        IUPACParser iup = new IUPACParser();
+        Object table = iup.getTable(1);
+        int[] frames = {1, 2, 3, -1, -2, -3};
+        int count = 0;
+        String stop1 = "TAA";
+        String stop2 = "TAG";
+        String stop3 = "TGA";
+        for (String sequ : seqframeMap.values()) {
+            int a = sequ.length() % 3;
+            sequ = sequ.substring(0, sequ.length() - a);
+            String orf = "";
+            int frame = frames[count];
+            count++;
+            int eindpositie = 0;
+            int startpositie = 0;
+            for (int i = 0; i < sequ.length(); i = i + 3) { // loopt over elke char+3 van de string heen
+                eindpositie = eindpositie + 3;
+                String codon = sequ.substring(i, i + 3);
+                if (codon.equals(stop1) | codon.equals(stop2) | codon.equals(stop3)) {
+                    if (100 < orf.length()) {
+                        startpositie = sequ.indexOf(orf);
+                        ORF orfObject = new ORF(frame,startpositie, eindpositie,orf);
+                    }
+                    orf = "";
+                } else {
+                    orf = orf + codon;
+                }
+
+            }
+        }
+
     }
 
     static String BLAST(String seq) {
@@ -88,7 +133,7 @@ public class Logica {
         String rid = null;          // blast request ID
         FileWriter writer = null;
         BufferedReader reader = null;
- 
+
         try {
             // send blast request and save request id
             rid = service.sendAlignmentRequest(seq2, props);
@@ -138,17 +183,13 @@ public class Logica {
             SAXBuilder saxBuilder = new SAXBuilder();
             Document document = saxBuilder.build(inputFile);
             System.out.println("Root element :" + document.getRootElement().getName());
-            Element classElement = document.getRootElement();            
+            Element classElement = document.getRootElement();
             Element blastoutput_iteration = classElement.getChild("BlastOutput_iterations");
             Element iteration = blastoutput_iteration.getChild("Iteration");
             Element iteration_hits = iteration.getChild("Iteration_hits");
             List<Element> hitList = iteration_hits.getChildren();
             System.out.println("----------------------------");
-            
-            
-            
-                    
-            
+
             for (int temp = 0; temp < hitList.size(); temp++) {
                 Element hit = hitList.get(temp);
                 Element hsps = hit.getChild("Hit_hsps");
@@ -158,7 +199,7 @@ public class Logica {
                 float eindEiwit = Float.parseFloat(hsp.getChild("Hsp_query-to").getText());
                 //float lengte = Float.parseFloat(hit.getChild("Hit_len").getText());
                 float lengte = Float.parseFloat(classElement.getChild("BlastOutput_query-len").getText());
-                float coverage = (((eindEiwit - startEiwit)+1) / lengte )* 100;
+                float coverage = (((eindEiwit - startEiwit) + 1) / lengte) * 100;
 
                 String id = hit.getChild("Hit_id").getText();
                 String[] idlist = id.split("\\|");
@@ -170,29 +211,28 @@ public class Logica {
                 String identitie = hsp.getChild("Hsp_identity").getText();
                 String accessie = hit.getChild("Hit_accession").getText();
                 String eiwitNaam = hit.getChild("Hit_def").getText().split("=")[1].split(";")[0];
-                
-                Object[] row = {eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
+
+                Object[] row = {eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
                 table.add(row);
-                
-                BLASTopslaan(eiwitNaam ,Evalue , coverage,identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline);
-                
+
+                BLASTopslaan(eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline);
+
             }
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally{
-        return table;
+        } finally {
+            return table;
+        }
     }
-    }
-    
 
-    static void BLASTopslaan(String eiwitNaam ,String Evalue , float coverage,String identitie, String accessie, float startEiwit, float eindEiwit,float lengte,String organism, String hitSeq, String querySeq,String midline){
+    static void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {
         //zet alles in db
     }
-    
-    static void SEQopslaan(String bestand, String codonTable,String date, String name, String organism){
+
+    static void SEQopslaan(String bestand, String codonTable, String date, String name, String organism) {
         // zet dit ook in db
     }
-            
+
 }
