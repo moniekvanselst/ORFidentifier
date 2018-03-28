@@ -16,7 +16,7 @@ public class Sequentie {
 
     private int seqID;
     private String seq;
-    private ArrayList<ORF> ORFlist;
+    static public ArrayList<ORF> ORFlist;
     static public HashMap<Integer, String> seqframeMap;
 
     public Sequentie(String seq, int seqID) {
