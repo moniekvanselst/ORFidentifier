@@ -191,8 +191,8 @@ public class Logica {
         //zet alles in db
     }
     
-    static void SEQopslaan(){
-        
+    static void SEQopslaan(String bestand, String codonTable,String date, String name, String organism){
+        // zet dit ook in db
     }
             
 }

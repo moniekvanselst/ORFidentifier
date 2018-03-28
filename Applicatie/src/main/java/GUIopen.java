@@ -226,9 +226,11 @@ JFileChooser FileChooser;
         // - if open previus laat logica alles ophalen uit de database en weergeven.
         // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
         String bestand = FileTextField.getText();
-//        CodonDropDown
-//        DateTextField
-//                NameTextField
+        String codonTable = CodonDropDown.getSelectedItem().toString();
+        String date = DateTextField.getText();
+        String name = NameTextField.getText();
+        String organism = OrganismTextField.getText();
+        Logica.SEQopslaan(bestand, codonTable, date, name, organism);
         Logica.readFile(bestand);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
