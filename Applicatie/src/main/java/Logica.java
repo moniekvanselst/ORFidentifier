@@ -76,6 +76,7 @@ public class Logica {
 
             // wait until results become available. Alternatively, one can do other computations/send other alignment requests
             while (!service.isReady(rid)) {
+                GUI.waitLabel.setText("Blasting.");
                 System.out.println("Waiting for results. Sleeping for 5 seconds");
                 Thread.sleep(5000);
             }
