@@ -28,6 +28,12 @@
             <version>2.0.6</version>
             <type>jar</type>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.biojava/biojava3-core -->
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava3-core</artifactId>
+            <version>3.0</version>
+        </dependency>
         <!-- other biojava jars as needed -->
     </dependencies>
 </project>
