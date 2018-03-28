@@ -203,6 +203,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void ORFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ORFButtonActionPerformed
         Logica.findORF();
+        int count = 0;
+        for (ORF orf:Sequentie.ORFlist){
+            String naam = Integer.toString(count)+"ORF";
+            ORFdropDown.addItem(naam);
+            count++;
+            jTextArea1.append("/n"+naam+": "+orf.getSeqorf());
+        }
     }//GEN-LAST:event_ORFButtonActionPerformed
 
     /**

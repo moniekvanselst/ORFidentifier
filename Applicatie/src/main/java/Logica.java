@@ -117,7 +117,8 @@ public class Logica {
                 if (codon.equals(stop1) | codon.equals(stop2) | codon.equals(stop3)) {
                     if (100 < orf.length()) {
                         startpositie = sequ.indexOf(orf);
-                        ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
+                        Sequentie.ORFlist.add(new ORF(frame, startpositie, eindpositie, orf));
+                        //ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                     }
                     orf = "";
                 } else {
