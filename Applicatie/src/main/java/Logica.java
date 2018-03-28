@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -47,15 +48,25 @@ public class Logica {
         try {
             BufferedReader infile = new BufferedReader(new FileReader(bestand));
             String line;
+            int seqID = 1;
+            boolean firstline = true;
+            String sequentie = "";
             while ((line = infile.readLine()) != null) {
-                String[] splitline = line.split("\n", -1);
-                //Sequentie seqObject = new Sequentie(splitline[1]);
+                if (!firstline) {
+                    System.out.println(line);
+                    sequentie = sequentie += line;
+                    System.out.println("ja");
+                } else {
+                    firstline = false;
+                }
 
             }
+            System.out.println(sequentie);
+            Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
-            System.out.println("Het gekozen bestand kan niet gelezen worden");
+            JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden", "Inane error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception exc) {
-            System.out.println("Er is een onbekende fout opgetreden");
+            JOptionPane.showMessageDialog(null, "Er is een onbekende fout opgetreden", "Inane error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -107,7 +118,7 @@ public class Logica {
                 if (codon.equals(stop1) | codon.equals(stop2) | codon.equals(stop3)) {
                     if (100 < orf.length()) {
                         startpositie = sequ.indexOf(orf);
-                        ORF orfObject = new ORF(frame,startpositie, eindpositie,orf);
+                        ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                     }
                     orf = "";
                 } else {

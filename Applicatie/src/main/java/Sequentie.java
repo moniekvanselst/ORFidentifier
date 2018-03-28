@@ -18,8 +18,8 @@ public class Sequentie {
     private ArrayList<ORF> ORFlist;
 
     public Sequentie(String seq, int seqID) {
-        System.out.println("in");
-        if (seq.matches("^[ATCG]+$")) {
+        System.out.println("dssd");
+        if (seq.matches("^[ATCGN]+$")) {
             System.out.println("goed");
             this.seq = seq;
             this.seqID = seqID;
