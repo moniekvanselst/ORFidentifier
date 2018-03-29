@@ -52,8 +52,8 @@
                       </Group>
                       <Component id="NewRadioButton" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="NameLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="NameLabel" min="-2" pref="109" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="NameTextField" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -198,7 +198,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="NameLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" value="Project Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="OrganismLAbel">
@@ -208,7 +208,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="DateLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date (dd-mm-yy):"/>
+        <Property name="text" type="java.lang.String" value="Date (yyyy-mm-dd):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -217,8 +217,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="NameTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="OrganismTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="DateTextField">
       <AuxValues>

@@ -1,6 +1,7 @@
 package orfidentifier;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -11,8 +12,7 @@ import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
  * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class Sequentie {
-//int seqID, String bestand, String keuze, String date, String name, String organism
-    private int seqID;
+    static public int seqID;
     private String seq;
     public String bestand;
     public String keuze;
@@ -22,22 +22,22 @@ public class Sequentie {
     static public ArrayList<ORF> ORFlist = new ArrayList<ORF>();
     static public HashMap<Integer, String> seqframeMap;
 
-    public Sequentie(String seq, int seqID, String bestand) throws CompoundNotFoundException {
-        System.out.println(seq);
+    public Sequentie(String seq, int seqID, String bestand) throws CompoundNotFoundException, IOException {
+        
         if (seq.matches("^[ATCGN]+$")) {
-            System.out.println("goed");
+            
             this.seq = seq;
             this.seqID = seqID;
             this.bestand = bestand;
             this.keuze = GUIopen.CodonDropDown.getSelectedItem().toString();
-            this.date =
-            //System.out.println("seq gemaakt");
-            new GUIopen().waitLabel.setText("is aan het openen..");
+            this.date = GUIopen.DateTextField.getText();
+            this.name = GUIopen.NameTextField.getText();
+            this.organism = GUIopen.OrganismTextField.getText();
+            new Logica().SEQopslaan(seqID, bestand, keuze, date, name, organism);
             new Logica().makeFrames(seq);
-            new GUIopen().waitLabel.setText("is aan het openen....");
-            //System.out.println("frames gemaakt");
+            
         } else {
-            System.out.println("fout");
+            
             JOptionPane.showMessageDialog(null, "De gegeven sequentie bestaat NIET uit DNA", "Inane error", JOptionPane.ERROR_MESSAGE);
 
         }

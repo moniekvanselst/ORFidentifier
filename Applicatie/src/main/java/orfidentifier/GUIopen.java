@@ -83,11 +83,11 @@ public class GUIopen extends javax.swing.JFrame {
 
         FileTextField.setText("File");
 
-        NameLabel.setText("Name:");
+        NameLabel.setText("Project Name:");
 
         OrganismLAbel.setText("Organism:");
 
-        DateLabel.setText("Date (dd-mm-yy):");
+        DateLabel.setText("Date (yyyy-mm-dd):");
 
         jLabel1.setText("Codontable:");
 
@@ -128,8 +128,8 @@ public class GUIopen extends javax.swing.JFrame {
                             .addComponent(BrowseButton))
                         .addComponent(NewRadioButton)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(NameLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(NameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
                             .addComponent(NameTextField))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(OrganismLAbel)
@@ -230,7 +230,7 @@ JFileChooser FileChooser;
         // TODO add your handling code here:
         // - if open previus laat logica alles ophalen uit de database en weergeven.
         // - if else geef bestand door aan logica en laat de seq zien in GUI met bijbehorende eiwit frames.
-        waitLabel.setText("is aan het openen..");
+        
         String bestand = FileTextField.getText();
         String codonTable = CodonDropDown.getSelectedItem().toString();
         String date = DateTextField.getText();
@@ -285,10 +285,10 @@ JFileChooser FileChooser;
     private javax.swing.JTextField FileTextField;
     private javax.swing.JTextArea InfoTextArea;
     private javax.swing.JLabel NameLabel;
-    private javax.swing.JTextField NameTextField;
+    public static javax.swing.JTextField NameTextField;
     private javax.swing.JRadioButton NewRadioButton;
     private javax.swing.JLabel OrganismLAbel;
-    private javax.swing.JTextField OrganismTextField;
+    public static javax.swing.JTextField OrganismTextField;
     private javax.swing.JComboBox<String> PreviusNameDropDown;
     private javax.swing.JRadioButton PreviusRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;

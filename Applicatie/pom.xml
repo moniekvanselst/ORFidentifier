@@ -34,6 +34,13 @@
             <artifactId>biojava3-core</artifactId>
             <version>3.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient -->
+<dependency>
+    <groupId>org.apache.derby</groupId>
+    <artifactId>derbyclient</artifactId>
+    <version>10.14.1.0</version>
+</dependency>
+
         <!-- other biojava jars as needed -->
     </dependencies>
 </project>
