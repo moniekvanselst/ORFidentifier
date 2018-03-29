@@ -1,3 +1,5 @@
+package orfidentifier;
+
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -256,7 +258,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton DownloadButton;
     private javax.swing.JButton ORFButton;
     private javax.swing.JLabel ORFLabel;
-    private javax.swing.JComboBox<String> ORFdropDown;
+    public javax.swing.JComboBox<String> ORFdropDown;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
