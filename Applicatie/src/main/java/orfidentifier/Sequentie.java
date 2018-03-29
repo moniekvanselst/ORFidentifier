@@ -6,14 +6,9 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author van Selst
+ * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class Sequentie {
 

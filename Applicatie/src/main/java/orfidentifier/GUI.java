@@ -8,16 +8,10 @@ import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.DNASequence;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 /**
  *
- * @author van Selst
+ * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class GUI extends javax.swing.JFrame {
 

@@ -33,6 +33,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -49,10 +50,13 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
 
 /**
  *
- * @author van Selst
+ * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class Logica {
 
+    /**
+ *Deze methode leest het gekozen bestand in en split op de enter. Vervolgens wordt er een object aangemaakt in Sequentie class.
+ */
     public void readFile(String bestand) {
         try {
             BufferedReader infile = new BufferedReader(new FileReader(bestand));
@@ -77,9 +81,10 @@ public class Logica {
             JOptionPane.showMessageDialog(null, "Er is een onbekende fout opgetreden", "Insane error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    public String[] makeFrames(String seq) throws CompoundNotFoundException {
-        //String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
+    /**
+    * Deze methode zet de gegeven sequentie om in de verschillende frames en slaat deze op in een hashmap
+    */
+    public String[] makeFrames(String seq) throws CompoundNotFoundException {  
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
         System.out.println("dddddksjhgfs");
         seqframe1 = new StringBuilder(seq.substring(0, seq.length() - 1)).toString();
@@ -92,7 +97,7 @@ public class Logica {
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         System.out.println("dd");
-        String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3};
+        String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3, seq};
         toProtein(frames);
         System.out.println("zz");
         return frames;
@@ -100,26 +105,22 @@ public class Logica {
     }
 
     public void toProtein(String[] frames) throws CompoundNotFoundException {
-        System.out.println("1");
-        TranscriptionEngine.Builder b = new TranscriptionEngine.Builder();
-        System.out.println("2");
         String keuze = GUIopen.CodonDropDown.getSelectedItem().toString();
         System.out.println(keuze);
         String[] keuzes = keuze.split("\\.");
-        System.out.println(keuzes[0]);
         int nr = Integer.parseInt(keuzes[0]);
-        System.out.println("5");
+        
+        TranscriptionEngine.Builder b = new TranscriptionEngine.Builder();
         b.table(nr).initMet(false).trimStop(false);
-        System.out.println("6");
         TranscriptionEngine engine = b.build();
-        System.out.println("ee");
+
         String proteinframe1 = new DNASequence(frames[0]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe2 = new DNASequence(frames[1]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe3 = new DNASequence(frames[2]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframecomp1 = new DNASequence(frames[3]).getRNASequence(engine).getProteinSequence(engine).toString();
         String proteinframecomp2 = new DNASequence(frames[4]).getRNASequence(engine).getProteinSequence(engine).toString();
         String proteinframecomp3 = new DNASequence(frames[5]).getRNASequence(engine).getProteinSequence(engine).toString();
-        System.out.println("alibaba");
+        
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
         seqframeMap.put(1, proteinframe1);
         seqframeMap.put(2, proteinframe2);
@@ -127,7 +128,12 @@ public class Logica {
         seqframeMap.put(-1, proteinframecomp1);
         seqframeMap.put(-2, proteinframecomp2);
         seqframeMap.put(-3, proteinframecomp3);
-        System.out.println("jostie tosti");
+        
+        Set<Map.Entry<Integer,String>> frameseqHashSet=seqframeMap.entrySet();
+        for(Map.Entry entry:frameseqHashSet ) {
+            GUI.SEQtextArea.setText("Frame:"+entry.getKey()+", Sequence:"+entry.getValue());
+        }
+        
         Sequentie.seqframeMap = seqframeMap;
     }
 

@@ -9,7 +9,7 @@ package orfidentifier;
 
 /**
  *
- * @author van Selst
+ * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class GUIblast extends javax.swing.JFrame {
 

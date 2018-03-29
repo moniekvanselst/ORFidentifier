@@ -1,11 +1,5 @@
 package orfidentifier;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 import java.io.File;
 import javafx.stage.FileChooser;
@@ -14,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author van Selst
+ * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class GUIopen extends javax.swing.JFrame {
 
