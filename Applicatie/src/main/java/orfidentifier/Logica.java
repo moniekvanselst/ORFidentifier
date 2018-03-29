@@ -241,8 +241,7 @@ public class Logica {
     }
 
     // verander bestandsnaam
-    public ArrayList<Object[]> BLASTparser(String path) {
-        ArrayList<Object[]> table = new ArrayList<Object[]>();
+    public void BLASTparser(String path, ORF orf) {
         try {
             File inputFile = new File(path);
             SAXBuilder saxBuilder = new SAXBuilder();
@@ -278,8 +277,7 @@ public class Logica {
                 String eiwitNaam = hit.getChild("Hit_def").getText().split("=")[1].split(";")[0];
 
                 Object[] row = {eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
-                table.add(row);
-
+                orf.table.add(row);
                 BLASTopslaan(eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline);
 
             }
@@ -287,9 +285,7 @@ public class Logica {
             e.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            return table;
-        }
+        } 
     }
 
     public int getSeqID() {

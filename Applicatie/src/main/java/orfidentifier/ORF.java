@@ -1,5 +1,7 @@
 package orfidentifier;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -10,6 +12,7 @@ public class ORF {
     int startpositie;
     int eindpositie;
     String seqorf;
+    public ArrayList<Object[]> table = new ArrayList<Object[]>();
 
     public ORF(int frame, int startpositie, int eindpositie, String seqorf) {
         this.frame = frame;
