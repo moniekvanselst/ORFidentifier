@@ -11,18 +11,26 @@ import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
  * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
  */
 public class Sequentie {
-
+//int seqID, String bestand, String keuze, String date, String name, String organism
     private int seqID;
     private String seq;
+    public String bestand;
+    public String keuze;
+    public String date;
+    public String name;
+    public String organism;
     static public ArrayList<ORF> ORFlist = new ArrayList<ORF>();
     static public HashMap<Integer, String> seqframeMap;
 
-    public Sequentie(String seq, int seqID) throws CompoundNotFoundException {
+    public Sequentie(String seq, int seqID, String bestand) throws CompoundNotFoundException {
         System.out.println(seq);
         if (seq.matches("^[ATCGN]+$")) {
             System.out.println("goed");
             this.seq = seq;
             this.seqID = seqID;
+            this.bestand = bestand;
+            this.keuze = GUIopen.CodonDropDown.getSelectedItem().toString();
+            this.date =
             //System.out.println("seq gemaakt");
             new GUIopen().waitLabel.setText("is aan het openen..");
             new Logica().makeFrames(seq);
