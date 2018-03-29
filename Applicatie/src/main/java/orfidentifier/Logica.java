@@ -1,18 +1,15 @@
 package orfidentifier;
 
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import org.biojava3.core.sequence.io.IUPACParser;
-
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -75,7 +72,7 @@ public class Logica {
             sequentie = sequentie.toUpperCase();
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
-            JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden"+exc.toString(), "Insane error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden" + exc.toString(), "Insane error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Er is een onbekende fout opgetreden", "Insane error", JOptionPane.ERROR_MESSAGE);
         }
@@ -101,9 +98,10 @@ public class Logica {
         return frames;
 
     }
-    public void toProtein(String[] frames) throws CompoundNotFoundException{
+
+    public void toProtein(String[] frames) throws CompoundNotFoundException {
         System.out.println("1");
-        TranscriptionEngine.Builder b = new TranscriptionEngine.Builder(); 
+        TranscriptionEngine.Builder b = new TranscriptionEngine.Builder();
         System.out.println("2");
         String keuze = GUIopen.CodonDropDown.getSelectedItem().toString();
         System.out.println(keuze);
@@ -152,8 +150,8 @@ public class Logica {
             int tel = 0;
             for (int i = 0; i < sequ.length(); i++) { // loopt over elke char+3 van de string heen
                 System.out.println("vier");
-                eindpositie = eindpositie +1;
-                String codon = sequ.substring(i, i +1);
+                eindpositie = eindpositie + 1;
+                String codon = sequ.substring(i, i + 1);
                 if (codon.equals("*")) {
                     System.out.println("vijf");
                     if (50 < orf.length()) {
@@ -162,11 +160,13 @@ public class Logica {
                         System.out.println("sez . vijf");
                         tel++;
                         ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
-                       // Sequentie.ORFlist.add(orfObject);
+                        System.out.println("***");
+                        Sequentie.ORFlist.add(orfObject);
+                        System.out.println("---");
                         System.out.println(orfObject.getSeqorf());
-                        GUI.ORFtextArea.append("f"+frame+" orf: "+tel+": "+orfObject.getSeqorf()+"\n");
-                      //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");mjhk
-                        GUI.ORFdropDown.addItem("f"+frame+" orf: "+tel);
+                        GUI.ORFtextArea.append("f" + frame + " orf: " + tel + ": " + orfObject.getSeqorf() + "\n");
+                        //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");mjhk
+                        GUI.ORFdropDown.addItem("f" + frame + " orf: " + tel);
                         System.out.println("zeven");
                     }
                     orf = "";
@@ -300,7 +300,7 @@ public class Logica {
             String selectLastRecord = "SELECT * FROM OWE7PG6.\"sequentie\" WHERE \"seq_id\" = (SELECT MAX(\"seq_id\") FROM OWE7PG6.\"sequentie\")";
 
             ResultSet rset = stmt.executeQuery(selectLastRecord);
-            
+
             rset.next();
             seqID = rset.getInt("seq_id");
             System.out.println(seqID);

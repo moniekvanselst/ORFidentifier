@@ -19,7 +19,7 @@ public class Sequentie {
 
     private int seqID;
     private String seq;
-    static public ArrayList<ORF> ORFlist;
+    static public ArrayList<ORF> ORFlist = new ArrayList<ORF>();
     static public HashMap<Integer, String> seqframeMap;
 
     public Sequentie(String seq, int seqID) throws CompoundNotFoundException {
@@ -41,6 +41,9 @@ public class Sequentie {
         
     }
 
+    static public void addORF(ORF orf){
+        ORFlist.add(orf);
+    }
     public int getSeqID() {
         return seqID;
     }
