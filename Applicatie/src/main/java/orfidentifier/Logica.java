@@ -265,11 +265,15 @@ public class Logica {
                         "jdbc:derby://localhost:1527/ORF Identifier DB", "owe7pg6", "bks");
                 Statement stmt = conn.createStatement();) {
 
-            String selectLastRecord = "SELECT * FROM OWE7PG6.\"sequentie\" ORDER BY \"seq_id\" DESC";
+            //String selectLastRecord = "SELECT * FROM OWE7PG6.\"sequentie\" ORDER BY \"seq_id\" DESC";
+            //String selectLastRecord = "SELECT TOP 1 * FROM OWE7PG6.\"sequentie\" ORDER BY \"seq_id\" DESC";
+            String selectLastRecord = "SELECT * FROM OWE7PG6.\"sequentie\" WHERE \"seq_id\" = (SELECT MAX(\"seq_id\") FROM OWE7PG6.\"sequentie\")";
 
             ResultSet rset = stmt.executeQuery(selectLastRecord);
-
+            
+            rset.next();
             seqID = rset.getInt("seq_id");
+            System.out.println(seqID);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
