@@ -1,12 +1,13 @@
 package orfidentifier;
 
+import java.util.ArrayList;
+import static orfidentifier.GUI.ORFdropDown;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author Moniek van Selst, Willem Korsten, Nicky van Bergen
@@ -18,6 +19,7 @@ public class GUIblast extends javax.swing.JFrame {
      */
     public GUIblast() {
         initComponents();
+
     }
 
     /**
@@ -29,26 +31,82 @@ public class GUIblast extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        hoofdLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        hoofdTextArea = new javax.swing.JTextArea();
+        showButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        hoofdLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        hoofdLabel.setText("Deatails blast results:");
+
+        hoofdTextArea.setColumns(20);
+        hoofdTextArea.setRows(5);
+        jScrollPane1.setViewportView(hoofdTextArea);
+
+        showButton.setText("show");
+        showButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hoofdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
+                        .addComponent(showButton)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hoofdLabel)
+                    .addComponent(showButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
+        int index = ORFdropDown.getSelectedIndex();
+        ORF orf = Sequentie.ORFlist.get(index);
+        ArrayList<Object[]> table = orf.table;
+        int count = 1;
+        for (Object[] row : table) {
+            hoofdTextArea.append("hit nr: " + count
+                    + "\nEiwitnaam: " + row[0]
+                    + "\nAccessiecode: " + row[4]
+                    + "\nOrganisme: " + row[8]
+                    + "\nLocatie ten opzichte van het ORF: " + row[5] + " - " + row[6]
+                    + "\tLenkte: " + row[7]
+                    + "\nEvalue: " + row[1]
+                    + "\tCoverage: " + row[2]
+                    + "\tIdentitie:" + row[3]
+                    + "\nquery  " + row[10]
+                    + "\n            " + row[11]
+                    + "\nhit        " + row[9]+"\n\n\n");
+            count++;
+        }
+    }//GEN-LAST:event_showButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void BLASTmain() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -78,9 +136,16 @@ public class GUIblast extends javax.swing.JFrame {
             public void run() {
                 new GUIblast().setVisible(true);
             }
-        });
+        }
+        );
+
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hoofdLabel;
+    private javax.swing.JTextArea hoofdTextArea;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton showButton;
     // End of variables declaration//GEN-END:variables
 }

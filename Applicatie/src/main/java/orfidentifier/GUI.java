@@ -47,6 +47,7 @@ public class GUI extends javax.swing.JFrame {
         BLASTtable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         waitLabel = new javax.swing.JLabel();
+        detailsBotton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +117,13 @@ public class GUI extends javax.swing.JFrame {
 
         waitLabel.setText(".");
 
+        detailsBotton.setText("show details BLAST result");
+        detailsBotton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsBottonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,7 +154,8 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(BLASTbutton))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(BLASTlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(detailsBotton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,7 +181,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(DownloadButton)
                     .addComponent(BLASTbutton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BLASTlabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BLASTlabel)
+                    .addComponent(detailsBotton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
@@ -190,10 +201,14 @@ public class GUI extends javax.swing.JFrame {
         int index = ORFdropDown.getSelectedIndex();
         ORF orf = Sequentie.ORFlist.get(index);
         String seq = orf.getSeqorf();
-        String path = new Logica().BLAST(seq);
-        ArrayList<Object[]> res = new Logica().BLASTparser(path);
+        
+        if (orf.table.isEmpty()){
+            String path = new Logica().BLAST(seq);
+            new Logica().BLASTparser(path, orf);
+        }
         DefaultTableModel model = (DefaultTableModel) BLASTtable.getModel();
-        for(Object[] row: res){
+        model.setRowCount(0);
+        for(Object[] row: orf.table){
             model.addRow(row);
         }
     }//GEN-LAST:event_BLASTbuttonActionPerformed
@@ -216,6 +231,10 @@ public class GUI extends javax.swing.JFrame {
 //            SEQtextArea.append("/n"+naam+": "+orf.getSeqorf());
 //        }
     }//GEN-LAST:event_ORFButtonActionPerformed
+
+    private void detailsBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsBottonActionPerformed
+        GUIblast.BLASTmain();
+    }//GEN-LAST:event_detailsBottonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +283,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> ORFdropDown;
     public static javax.swing.JTextArea ORFtextArea;
     public static javax.swing.JTextArea SEQtextArea;
+    private javax.swing.JButton detailsBotton;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

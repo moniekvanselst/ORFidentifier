@@ -55,7 +55,7 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
 public class Logica {
 
     /**
- *Deze methode leest het gekozen bestand in en split op de enter. Vervolgens wordt er een object aangemaakt in Sequentie class.
+ *Deze methode leest het gekozen bestand in en split op de enter. Vervolgens wordt van de Sequentie een object aangemaakt in Sequentie class mbv de constructor.
  */
     public void readFile(String bestand) {
         try {
@@ -82,24 +82,29 @@ public class Logica {
         }
     }
     /**
-    * Deze methode zet de gegeven sequentie om in de verschillende frames en slaat deze op in een hashmap
+    * Deze methode zet de gegeven sequentie om in de verschillende frames
     */
     public String[] makeFrames(String seq) throws CompoundNotFoundException {  
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
-        System.out.println("dddddksjhgfs");
+ 
         seqframe1 = new StringBuilder(seq.substring(0, seq.length() - 1)).toString();
         seqframe2 = new StringBuilder(seq.substring(1, seq.length() - 1)).toString();
         seqframe3 = new StringBuilder(seq.substring(2, seq.length() - 1)).toString();
-        seqframerev1 = new StringBuilder(seq.substring(0, seq.length() - 1)).reverse().toString();
-        seqframerev2 = new StringBuilder(seq.substring(1, seq.length() - 1)).reverse().toString();
-        seqframerev3 = new StringBuilder(seq.substring(2, seq.length() - 1)).reverse().toString();
+        String seqreverse = new StringBuilder(seq).reverse().toString();
+        System.out.println(seq);
+        System.out.println(seqreverse);
+        seqframerev1 = new StringBuilder(seqreverse.substring(0, seq.length() - 1)).toString();
+        seqframerev2 = new StringBuilder(seqreverse.substring(1, seq.length() - 1)).toString();
+        seqframerev3 = new StringBuilder(seqreverse.substring(2, seq.length() - 1)).toString();
+        System.out.println(seqframerev1);
+        System.out.println(seqframerev2);
         seqframecomp1 = seqframerev1.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-        System.out.println("dd");
         String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3, seq};
+        System.out.println(seqframecomp1);
+        System.out.println(seqframecomp2);
         toProtein(frames);
-        System.out.println("zz");
         return frames;
 
     }
@@ -117,9 +122,9 @@ public class Logica {
         String proteinframe1 = new DNASequence(frames[0]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe2 = new DNASequence(frames[1]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe3 = new DNASequence(frames[2]).getRNASequence().getProteinSequence(engine).toString();
-        String proteinframecomp1 = new DNASequence(frames[3]).getRNASequence(engine).getProteinSequence(engine).toString();
-        String proteinframecomp2 = new DNASequence(frames[4]).getRNASequence(engine).getProteinSequence(engine).toString();
-        String proteinframecomp3 = new DNASequence(frames[5]).getRNASequence(engine).getProteinSequence(engine).toString();
+        String proteinframecomp1 = new DNASequence(frames[3]).getRNASequence().getProteinSequence(engine).toString();
+        String proteinframecomp2 = new DNASequence(frames[4]).getRNASequence().getProteinSequence(engine).toString();
+        String proteinframecomp3 = new DNASequence(frames[5]).getRNASequence().getProteinSequence(engine).toString();
         
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
         seqframeMap.put(1, proteinframe1);
@@ -129,10 +134,13 @@ public class Logica {
         seqframeMap.put(-2, proteinframecomp2);
         seqframeMap.put(-3, proteinframecomp3);
         
-        Set<Map.Entry<Integer,String>> frameseqHashSet=seqframeMap.entrySet();
-        for(Map.Entry entry:frameseqHashSet ) {
-            GUI.SEQtextArea.setText("Frame:"+entry.getKey()+", Sequence:"+entry.getValue());
-        }
+        GUI.SEQtextArea.append("Frame: 1, Sequence:"+proteinframe1+"\n");
+        GUI.SEQtextArea.append("Frame: 2, Sequence: "+proteinframe2+"\n");
+        GUI.SEQtextArea.append("Frame: 3, Sequence:  "+proteinframe3+"\n");
+        GUI.SEQtextArea.append("Original Sequence:"+frames[6]+"\n");
+        GUI.SEQtextArea.append("Frame: -1, Sequence:"+proteinframecomp1+"\n");
+        GUI.SEQtextArea.append("Frame: -2, Sequence: "+proteinframecomp2+"\n");
+        GUI.SEQtextArea.append("Frame: -3, Sequence:   "+proteinframecomp3+"\n");
         
         Sequentie.seqframeMap = seqframeMap;
     }
@@ -241,8 +249,7 @@ public class Logica {
     }
 
     // verander bestandsnaam
-    public ArrayList<Object[]> BLASTparser(String path) {
-        ArrayList<Object[]> table = new ArrayList<Object[]>();
+    public void BLASTparser(String path, ORF orf) {
         try {
             File inputFile = new File(path);
             SAXBuilder saxBuilder = new SAXBuilder();
@@ -278,8 +285,7 @@ public class Logica {
                 String eiwitNaam = hit.getChild("Hit_def").getText().split("=")[1].split(";")[0];
 
                 Object[] row = {eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline};
-                table.add(row);
-
+                orf.table.add(row);
                 BLASTopslaan(eiwitNaam, Evalue, coverage, identitie, accessie, startEiwit, eindEiwit, lengte, organism, hitSeq, querySeq, midline);
 
             }
@@ -287,9 +293,7 @@ public class Logica {
             e.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            return table;
-        }
+        } 
     }
 
     public int getSeqID() {

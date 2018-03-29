@@ -52,7 +52,8 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="BLASTlabel" min="-2" pref="87" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="detailsBotton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -85,7 +86,10 @@
                   <Component id="BLASTbutton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="BLASTlabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BLASTlabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="detailsBotton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="192" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -259,6 +263,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="detailsBotton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="show details BLAST result"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detailsBottonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
