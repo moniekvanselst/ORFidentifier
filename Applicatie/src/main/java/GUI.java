@@ -205,7 +205,7 @@ public class GUI extends javax.swing.JFrame {
         Logica.findORF();
         int count = 0;
         for (ORF orf:Sequentie.ORFlist){
-            String naam = Integer.toString(count)+"ORF";
+            String naam = "ORF"+Integer.toString(count);
             ORFdropDown.addItem(naam);
             count++;
             jTextArea1.append("/n"+naam+": "+orf.getSeqorf());

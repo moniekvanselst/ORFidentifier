@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -64,6 +66,7 @@ public class Logica {
                     firstline = false;
                 }
             }
+            sequentie = sequentie.toUpperCase();
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
             JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden", "Inane error", JOptionPane.ERROR_MESSAGE);
@@ -100,15 +103,18 @@ public class Logica {
     }
 
     static void findORF() {
+        System.out.println("een");
         HashMap<Integer, String> seqframeMap = Sequentie.seqframeMap;
         IUPACParser iup = new IUPACParser();
         Object table = iup.getTable(1);
         int[] frames = {1, 2, 3, -1, -2, -3};
         int count = 0;
+        System.out.println("twee");
         String stop1 = "TAA";
         String stop2 = "TAG";
         String stop3 = "TGA";
         for (String sequ : seqframeMap.values()) {
+            System.out.println("drie");
             int a = sequ.length() % 3;
             sequ = sequ.substring(0, sequ.length() - a);
             String orf = "";
@@ -117,15 +123,22 @@ public class Logica {
             int eindpositie = 0;
             int startpositie = 0;
             for (int i = 0; i < sequ.length(); i = i + 3) { // loopt over elke char+3 van de string heen
+                System.out.println("vier");
                 eindpositie = eindpositie + 3;
                 String codon = sequ.substring(i, i + 3);
                 if (codon.equals(stop1) | codon.equals(stop2) | codon.equals(stop3)) {
+                    System.out.println("vijf");
                     if (100 < orf.length()) {
+                        System.out.println("zes");
                         startpositie = sequ.indexOf(orf);
-                        Sequentie.ORFlist.add(new ORF(frame, startpositie, eindpositie, orf));
+                        System.out.println("sez . vijf");
+                        ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
+                        //Sequentie.ORFlist.add(new ORF(frame, startpositie, eindpositie, orf));
+                        System.out.println("zeven");
                         //ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                     }
                     orf = "";
+                    System.out.println("acht");
                 } else {
                     orf = orf + codon;
                 }

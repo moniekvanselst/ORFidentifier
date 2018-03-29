@@ -230,7 +230,7 @@ JFileChooser FileChooser;
         String date = DateTextField.getText();
         String name = NameTextField.getText();
         String organism = OrganismTextField.getText();
-        Logica.SEQopslaan(bestand, codonTable, date, name, organism);
+        //Logica.SEQopslaan(bestand, codonTable, date, name, organism);
         Logica.readFile(bestand);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

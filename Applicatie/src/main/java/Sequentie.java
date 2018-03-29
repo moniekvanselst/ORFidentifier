@@ -20,12 +20,14 @@ public class Sequentie {
     static public HashMap<Integer, String> seqframeMap;
 
     public Sequentie(String seq, int seqID) {
-        System.out.println("dssd");
+        System.out.println(seq);
         if (seq.matches("^[ATCGN]+$")) {
             System.out.println("goed");
             this.seq = seq;
             this.seqID = seqID;
+            System.out.println("seq gemaakt");
             Logica.makeFrames(this.seq);
+            System.out.println("frames gemaakt");
         } else {
             System.out.println("fout");
             JOptionPane.showMessageDialog(null, "De gegeven sequentie bestaat NIET uit DNA", "Inane error", JOptionPane.ERROR_MESSAGE);
