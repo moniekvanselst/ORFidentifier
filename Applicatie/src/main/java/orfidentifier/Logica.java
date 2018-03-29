@@ -39,8 +39,11 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
+import org.biojava.nbio.core.sequence.DNASequence;
 
 import org.biojava.nbio.core.sequence.io.util.IOUtils;
+import org.biojava.nbio.core.sequence.transcription.TranscriptionEngine;
 import static org.biojava.nbio.ws.alignment.qblast.BlastAlignmentParameterEnum.ENTREZ_QUERY;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
@@ -78,7 +81,7 @@ public class Logica {
         }
     }
 
-    public void makeFrames(String seq) {
+    public String[] makeFrames(String seq) throws CompoundNotFoundException {
         //String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
 
@@ -92,17 +95,33 @@ public class Logica {
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
 
-        // hier frames omzetten naar eiwitten
+        String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3};
+        toProtein(frames);
+        return frames;
+
+    }
+    public void toProtein(String[] frames) throws CompoundNotFoundException{
+        
+        TranscriptionEngine.Builder b = new TranscriptionEngine.Builder(); 
+        b.table(1).initMet(false).trimStop(false);
+        TranscriptionEngine engine = b.build();
+        
+        String proteinframe1 = new DNASequence(frames[0]).getRNASequence().getProteinSequence(engine).toString();
+        String proteinframe2 = new DNASequence(frames[1]).getRNASequence().getProteinSequence(engine).toString();
+        String proteinframe3 = new DNASequence(frames[2]).getRNASequence().getProteinSequence(engine).toString();
+        String proteinframecomp1 = new DNASequence(frames[3]).getRNASequence(engine).getProteinSequence(engine).toString();
+        String proteinframecomp2 = new DNASequence(frames[4]).getRNASequence(engine).getProteinSequence(engine).toString();
+        String proteinframecomp3 = new DNASequence(frames[5]).getRNASequence(engine).getProteinSequence(engine).toString();
+        
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
-        seqframeMap.put(1, seqframe1);
-        seqframeMap.put(2, seqframe2);
-        seqframeMap.put(3, seqframe3);
-        seqframeMap.put(-1, seqframecomp1);
-        seqframeMap.put(-2, seqframecomp2);
-        seqframeMap.put(-3, seqframecomp3);
-
+        seqframeMap.put(1, frames[0]);
+        seqframeMap.put(2, frames[1]);
+        seqframeMap.put(3, frames[2]);
+        seqframeMap.put(-1, frames[3]);
+        seqframeMap.put(-2, frames[4]);
+        seqframeMap.put(-3, frames[5]);
+        
         Sequentie.seqframeMap = seqframeMap;
-
     }
 
     public void findORF() {
