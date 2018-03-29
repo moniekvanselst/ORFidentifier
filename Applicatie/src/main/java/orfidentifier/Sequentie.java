@@ -4,6 +4,7 @@ package orfidentifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +22,7 @@ public class Sequentie {
     static public ArrayList<ORF> ORFlist;
     static public HashMap<Integer, String> seqframeMap;
 
-    public Sequentie(String seq, int seqID) {
+    public Sequentie(String seq, int seqID) throws CompoundNotFoundException {
         System.out.println(seq);
         if (seq.matches("^[ATCGN]+$")) {
             System.out.println("goed");
@@ -29,7 +30,7 @@ public class Sequentie {
             this.seqID = seqID;
             //System.out.println("seq gemaakt");
             new GUIopen().waitLabel.setText("is aan het openen..");
-            new Logica().makeFrames(this.seq);
+            new Logica().makeFrames(seq);
             new GUIopen().waitLabel.setText("is aan het openen....");
             //System.out.println("frames gemaakt");
         } else {

@@ -97,8 +97,7 @@ public class GUIopen extends javax.swing.JFrame {
 
         jLabel1.setText("Codontable:");
 
-        CodonDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flatworm mitochondrial", "Yeast mitochondrial", "Ascidian mitochondrial", "Euplotid nuclear", "Universal", "Invertebrate mitochondrial", "Blepharisma macronuclear", "Alternative yeast nuclear", "Bacterial", "Vertebrate mitochondrial", "Ciliate nuclear", "Mold mitochondrial", "Echinoderm mitochondrial" }));
-        CodonDropDown.setSelectedIndex(4);
+        CodonDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1. Universal", "2. Vertebrate mitochondrial", "3. Yeast mitochondrial", "4. Mold mitochondrial", "5. Invertebrate mitochondrial", "6. Ciliate nuclear", "9. Echinoderm mitochondrial", "10. Euplotid nuclear", "11. Bacterial", "12. Alternative yeast nuclear", "13. Ascidian mitochondrial", "14. Flatworm mitochondrial", "15. Blepharisma macronuclear", "16. 2chlorophycean mitochondrial", "21. Trematode mitochondrial", "23. Scenedesmuis mitochondrial" }));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Open");
@@ -286,7 +285,7 @@ JFileChooser FileChooser;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseButton;
-    private javax.swing.JComboBox<String> CodonDropDown;
+    public static javax.swing.JComboBox<String> CodonDropDown;
     private javax.swing.JLabel DateLabel;
     private javax.swing.JTextField DateTextField;
     private javax.swing.JTextField FileTextField;

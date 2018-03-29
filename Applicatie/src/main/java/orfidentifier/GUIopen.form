@@ -225,26 +225,29 @@
     <Component class="javax.swing.JComboBox" name="CodonDropDown">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="13">
-            <StringItem index="0" value="Flatworm mitochondrial"/>
-            <StringItem index="1" value="Yeast mitochondrial"/>
-            <StringItem index="2" value="Ascidian mitochondrial"/>
-            <StringItem index="3" value="Euplotid nuclear"/>
-            <StringItem index="4" value="Universal"/>
-            <StringItem index="5" value="Invertebrate mitochondrial"/>
-            <StringItem index="6" value="Blepharisma macronuclear"/>
-            <StringItem index="7" value="Alternative yeast nuclear"/>
-            <StringItem index="8" value="Bacterial"/>
-            <StringItem index="9" value="Vertebrate mitochondrial"/>
-            <StringItem index="10" value="Ciliate nuclear"/>
-            <StringItem index="11" value="Mold mitochondrial"/>
-            <StringItem index="12" value="Echinoderm mitochondrial"/>
+          <StringArray count="16">
+            <StringItem index="0" value="1. Universal"/>
+            <StringItem index="1" value="2. Vertebrate mitochondrial"/>
+            <StringItem index="2" value="3. Yeast mitochondrial"/>
+            <StringItem index="3" value="4. Mold mitochondrial"/>
+            <StringItem index="4" value="5. Invertebrate mitochondrial"/>
+            <StringItem index="5" value="6. Ciliate nuclear"/>
+            <StringItem index="6" value="9. Echinoderm mitochondrial"/>
+            <StringItem index="7" value="10. Euplotid nuclear"/>
+            <StringItem index="8" value="11. Bacterial"/>
+            <StringItem index="9" value="12. Alternative yeast nuclear"/>
+            <StringItem index="10" value="13. Ascidian mitochondrial"/>
+            <StringItem index="11" value="14. Flatworm mitochondrial"/>
+            <StringItem index="12" value="15. Blepharisma macronuclear"/>
+            <StringItem index="13" value="16. 2chlorophycean mitochondrial"/>
+            <StringItem index="14" value="21. Trematode mitochondrial"/>
+            <StringItem index="15" value="23. Scenedesmuis mitochondrial"/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="4"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

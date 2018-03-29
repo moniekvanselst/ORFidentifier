@@ -75,16 +75,16 @@ public class Logica {
             sequentie = sequentie.toUpperCase();
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
-            JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden", "Inane error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden"+exc.toString(), "Insane error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Er is een onbekende fout opgetreden", "Inane error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Er is een onbekende fout opgetreden", "Insane error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public String[] makeFrames(String seq) throws CompoundNotFoundException {
         //String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
-
+        System.out.println("dddddksjhgfs");
         seqframe1 = new StringBuilder(seq.substring(0, seq.length() - 1)).toString();
         seqframe2 = new StringBuilder(seq.substring(1, seq.length() - 1)).toString();
         seqframe3 = new StringBuilder(seq.substring(2, seq.length() - 1)).toString();
@@ -94,33 +94,42 @@ public class Logica {
         seqframecomp1 = seqframerev1.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-
+        System.out.println("dd");
         String[] frames = {seqframe1, seqframe2, seqframe3, seqframecomp1, seqframecomp2, seqframecomp3};
         toProtein(frames);
+        System.out.println("zz");
         return frames;
 
     }
     public void toProtein(String[] frames) throws CompoundNotFoundException{
-        
+        System.out.println("1");
         TranscriptionEngine.Builder b = new TranscriptionEngine.Builder(); 
-        b.table(1).initMet(false).trimStop(false);
+        System.out.println("2");
+        String keuze = GUIopen.CodonDropDown.getSelectedItem().toString();
+        System.out.println(keuze);
+        String[] keuzes = keuze.split("\\.");
+        System.out.println(keuzes[0]);
+        int nr = Integer.parseInt(keuzes[0]);
+        System.out.println("5");
+        b.table(nr).initMet(false).trimStop(false);
+        System.out.println("6");
         TranscriptionEngine engine = b.build();
-        
+        System.out.println("ee");
         String proteinframe1 = new DNASequence(frames[0]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe2 = new DNASequence(frames[1]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframe3 = new DNASequence(frames[2]).getRNASequence().getProteinSequence(engine).toString();
         String proteinframecomp1 = new DNASequence(frames[3]).getRNASequence(engine).getProteinSequence(engine).toString();
         String proteinframecomp2 = new DNASequence(frames[4]).getRNASequence(engine).getProteinSequence(engine).toString();
         String proteinframecomp3 = new DNASequence(frames[5]).getRNASequence(engine).getProteinSequence(engine).toString();
-        
+        System.out.println("alibaba");
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
-        seqframeMap.put(1, frames[0]);
-        seqframeMap.put(2, frames[1]);
-        seqframeMap.put(3, frames[2]);
-        seqframeMap.put(-1, frames[3]);
-        seqframeMap.put(-2, frames[4]);
-        seqframeMap.put(-3, frames[5]);
-        
+        seqframeMap.put(1, proteinframe1);
+        seqframeMap.put(2, proteinframe2);
+        seqframeMap.put(3, proteinframe3);
+        seqframeMap.put(-1, proteinframecomp1);
+        seqframeMap.put(-2, proteinframecomp2);
+        seqframeMap.put(-3, proteinframecomp3);
+        System.out.println("jostie tosti");
         Sequentie.seqframeMap = seqframeMap;
     }
 
@@ -132,35 +141,32 @@ public class Logica {
         int[] frames = {1, 2, 3, -1, -2, -3};
         int count = 0;
         System.out.println("twee");
-        String stop1 = "TAA";
-        String stop2 = "TAG";
-        String stop3 = "TGA";
         for (String sequ : seqframeMap.values()) {
             GUI.waitLabel.setText("is aan het openen....");
             System.out.println("drie");
-            int a = sequ.length() % 3;
-            sequ = sequ.substring(0, sequ.length() - a);
             String orf = "";
             int frame = frames[count];
             count++;
             int eindpositie = 0;
             int startpositie = 0;
-            for (int i = 0; i < sequ.length(); i = i + 3) { // loopt over elke char+3 van de string heen
+            int tel = 0;
+            for (int i = 0; i < sequ.length(); i++) { // loopt over elke char+3 van de string heen
                 System.out.println("vier");
-                eindpositie = eindpositie + 3;
-                String codon = sequ.substring(i, i + 3);
-                if (codon.equals(stop1) | codon.equals(stop2) | codon.equals(stop3)) {
+                eindpositie = eindpositie +1;
+                String codon = sequ.substring(i, i +1);
+                if (codon.equals("*")) {
                     System.out.println("vijf");
-                    if (100 < orf.length()) {
+                    if (50 < orf.length()) {
                         System.out.println("zes");
                         startpositie = sequ.indexOf(orf);
                         System.out.println("sez . vijf");
+                        tel++;
                         ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                        // Sequentie.ORFlist.add(orfObject);
                         System.out.println(orfObject.getSeqorf());
-                        GUI.ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
+                        GUI.ORFtextArea.append("f"+frame+" orf: "+tel+": "+orfObject.getSeqorf()+"\n");
                       //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");mjhk
-                        GUI.ORFdropDown.addItem("f"+frame+" orf: "+i);
+                        GUI.ORFdropDown.addItem("f"+frame+" orf: "+tel);
                         System.out.println("zeven");
                     }
                     orf = "";
