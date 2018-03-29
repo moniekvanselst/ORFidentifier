@@ -181,8 +181,6 @@ public class Logica {
     }
 
     public String BLAST(String seq) {
-        String seq2 = "MELGLGGLSTLSHCPWPRQQAPLGLSAQPALWPTLAALALLSSVAEASLGSAPRSPAPREGPPPVLASPAGHLPGGRTARWCSGRARRPPPQPSRPAPPPPAPPSALPRGGRAARAGGPGSRARAAGARGCRLRSQLVPVRALGLGHRSDELVRFRFCSGSCRRARSPHDLSLASLLGAGALRPPPGSRPVSQPCCRPTRYEAVSFMDVNSTWRTVDRLSATACGCLG";
-
         NCBIQBlastService service = new NCBIQBlastService();
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         props.setBlastProgram(BlastProgramEnum.blastp);
@@ -197,7 +195,7 @@ public class Logica {
 
         try {
             // send blast request and save request id
-            rid = service.sendAlignmentRequest(seq2, props);
+            rid = service.sendAlignmentRequest(seq, props);
 
             // wait until results become available. Alternatively, one can do other computations/send other alignment requests
             while (!service.isReady(rid)) {

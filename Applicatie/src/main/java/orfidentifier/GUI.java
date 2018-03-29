@@ -193,7 +193,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_openButtonActionPerformed
 
     private void BLASTbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLASTbuttonActionPerformed
-        String seq = "AAALL";
+        int index = ORFdropDown.getSelectedIndex();
+        ORF orf = Sequentie.ORFlist.get(index);
+        String seq = orf.getSeqorf();
         String path = new Logica().BLAST(seq);
         ArrayList<Object[]> res = new Logica().BLASTparser(path);
         DefaultTableModel model = (DefaultTableModel) BLASTtable.getModel();
