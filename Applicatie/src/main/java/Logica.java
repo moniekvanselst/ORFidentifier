@@ -24,6 +24,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +53,8 @@ public class Logica {
         try {
             BufferedReader infile = new BufferedReader(new FileReader(bestand));
             String line;
-            int seqID = 1;
+            int seqID = getSeqID();
+            System.out.println(seqID);
             boolean firstline = true;
             String sequentie = "";
             while ((line = infile.readLine()) != null) {
@@ -79,9 +85,8 @@ public class Logica {
         seqframecomp1 = seqframerev1.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp2 = seqframerev2.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
         seqframecomp3 = seqframerev3.replaceAll("A", "t").replaceAll("T", "a").replaceAll("G", "c").replaceAll("C", "g").toUpperCase();
-        
+
         // hier frames omzetten naar eiwitten
-        
         HashMap<Integer, String> seqframeMap = new HashMap<Integer, String>();
         seqframeMap.put(1, seqframe1);
         seqframeMap.put(2, seqframe2);
@@ -89,7 +94,7 @@ public class Logica {
         seqframeMap.put(-1, seqframecomp1);
         seqframeMap.put(-2, seqframecomp2);
         seqframeMap.put(-3, seqframecomp3);
-        
+
         Sequentie.seqframeMap = seqframeMap;
 
     }
@@ -186,7 +191,7 @@ public class Logica {
         }
     }
 
-    // verander bastands naam
+    // verander bestandsnaam
     static ArrayList<Object[]> BLASTparser(String path) {
         ArrayList<Object[]> table = new ArrayList<Object[]>();
         try {
@@ -238,12 +243,32 @@ public class Logica {
         }
     }
 
-    static void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {
-        //zet alles in db
+    static int getSeqID() {
+        int seqID = 0;
+        try (
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:derby://localhost:1527/ORF Identifier DB", "owe7pg6", "bks");
+                Statement stmt = conn.createStatement();) {
+
+            String selectLastRecord = "SELECT * FROM OWE7PG6.\"sequentie\" ORDER BY \"seq_id\" DESC";
+
+            ResultSet rset = stmt.executeQuery(selectLastRecord);
+
+            seqID = rset.getInt("seq_id");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        seqID++;
+        return seqID;
     }
 
     static void SEQopslaan(String bestand, String codonTable, String date, String name, String organism) {
         // zet dit ook in db
+    }
+
+    static void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {
+        //zet alles in db
     }
 
 }
