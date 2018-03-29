@@ -139,9 +139,9 @@ public class Logica {
                         ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                        // Sequentie.ORFlist.add(orfObject);
                         System.out.println(orfObject.getSeqorf());
-                        GUI.ORFtextArea.setText("ORF "+i);//": "+orfObject.getSeqorf()+"/n");
-                      //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
-                        GUI.ORFdropDown.addItem("ORF"+frame);
+                        GUI.ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
+                      //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");mjhk
+                        GUI.ORFdropDown.addItem("f"+frame+" orf: "+i);
                         System.out.println("zeven");
                     }
                     orf = "";
