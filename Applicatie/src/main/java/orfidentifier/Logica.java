@@ -74,7 +74,7 @@ public class Logica {
             }
             GUIopen.waitLabel.setText("is aan het openen....");
             sequentie = sequentie.toUpperCase();
-            Sequentie seqObject = new Sequentie(sequentie, seqID);
+            Sequentie seqObject = new Sequentie(sequentie, seqID, bestand);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
             JOptionPane.showMessageDialog(null, "Het gekozen bestand kan niet gelezen worden" + exc.toString(), "Insane error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception exc) {
@@ -320,8 +320,8 @@ public class Logica {
         return seqID;
     }
 
-    public void SEQopslaan(String bestand, String codonTable, String date, String name, String organism) {
-        // zet dit ook in db
+    public void SEQopslaan(int seqID, String bestand, String keuze, String date, String name, String organism) {
+            
     }
 
     public void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {

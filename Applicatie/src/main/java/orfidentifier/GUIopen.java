@@ -281,7 +281,7 @@ JFileChooser FileChooser;
     private javax.swing.JButton BrowseButton;
     public static javax.swing.JComboBox<String> CodonDropDown;
     private javax.swing.JLabel DateLabel;
-    private javax.swing.JTextField DateTextField;
+    public static javax.swing.JTextField DateTextField;
     private javax.swing.JTextField FileTextField;
     private javax.swing.JTextArea InfoTextArea;
     private javax.swing.JLabel NameLabel;
