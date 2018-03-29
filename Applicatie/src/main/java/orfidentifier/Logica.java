@@ -53,7 +53,7 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Logica {
 
-    static void readFile(String bestand) {
+    public void readFile(String bestand) {
         try {
             BufferedReader infile = new BufferedReader(new FileReader(bestand));
             String line;
@@ -68,7 +68,7 @@ public class Logica {
                     firstline = false;
                 }
             }
-            new GUIopen().waitLabel.setText("is aan het openen....");
+            GUIopen.waitLabel.setText("is aan het openen....");
             sequentie = sequentie.toUpperCase();
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
@@ -78,7 +78,7 @@ public class Logica {
         }
     }
 
-    static void makeFrames(String seq) {
+    public void makeFrames(String seq) {
         //String seq = "ATCCCACCAGCACGACGACGAGCAGCAGCGACGAGCGAGCACAGCGAAGCAGC"; // nog vervangen door Sequentie.getseq     
         String seqframe1, seqframe2, seqframe3, seqframerev1, seqframerev2, seqframerev3, seqframecomp1, seqframecomp2, seqframecomp3;
 
@@ -105,7 +105,7 @@ public class Logica {
 
     }
 
-    static void findORF() {
+    public void findORF() {
         System.out.println("een");
         HashMap<Integer, String> seqframeMap = Sequentie.seqframeMap;
         IUPACParser iup = new IUPACParser();
@@ -137,9 +137,11 @@ public class Logica {
                         startpositie = sequ.indexOf(orf);
                         System.out.println("sez . vijf");
                         ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
-                        Sequentie.ORFlist.add(orfObject);
-                        new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
-                        new GUI().ORFdropDown.addItem("ORF"+i);
+                       // Sequentie.ORFlist.add(orfObject);
+                        System.out.println(orfObject.getSeqorf());
+                        GUI.ORFtextArea.setText("ORF "+i);//": "+orfObject.getSeqorf()+"/n");
+                      //new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
+                        GUI.ORFdropDown.addItem("ORF"+frame);
                         System.out.println("zeven");
                     }
                     orf = "";
@@ -153,7 +155,7 @@ public class Logica {
 
     }
 
-    static String BLAST(String seq) {
+    public String BLAST(String seq) {
         String seq2 = "MELGLGGLSTLSHCPWPRQQAPLGLSAQPALWPTLAALALLSSVAEASLGSAPRSPAPREGPPPVLASPAGHLPGGRTARWCSGRARRPPPQPSRPAPPPPAPPSALPRGGRAARAGGPGSRARAAGARGCRLRSQLVPVRALGLGHRSDELVRFRFCSGSCRRARSPHDLSLASLLGAGALRPPPGSRPVSQPCCRPTRYEAVSFMDVNSTWRTVDRLSATACGCLG";
 
         NCBIQBlastService service = new NCBIQBlastService();
@@ -210,7 +212,7 @@ public class Logica {
     }
 
     // verander bestandsnaam
-    static ArrayList<Object[]> BLASTparser(String path) {
+    public ArrayList<Object[]> BLASTparser(String path) {
         ArrayList<Object[]> table = new ArrayList<Object[]>();
         try {
             File inputFile = new File(path);
@@ -261,7 +263,7 @@ public class Logica {
         }
     }
 
-    static int getSeqID() {
+    public int getSeqID() {
         int seqID = 0;
         try (
                 Connection conn = DriverManager.getConnection(
@@ -285,11 +287,11 @@ public class Logica {
         return seqID;
     }
 
-    static void SEQopslaan(String bestand, String codonTable, String date, String name, String organism) {
+    public void SEQopslaan(String bestand, String codonTable, String date, String name, String organism) {
         // zet dit ook in db
     }
 
-    static void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {
+    public void BLASTopslaan(String eiwitNaam, String Evalue, float coverage, String identitie, String accessie, float startEiwit, float eindEiwit, float lengte, String organism, String hitSeq, String querySeq, String midline) {
         //zet alles in db
     }
 

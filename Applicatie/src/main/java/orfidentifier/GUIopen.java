@@ -244,7 +244,7 @@ JFileChooser FileChooser;
         String name = NameTextField.getText();
         String organism = OrganismTextField.getText();
         //Logica.SEQopslaan(bestand, codonTable, date, name, organism);
-        Logica.readFile(bestand);
+        new Logica().readFile(bestand);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -302,6 +302,6 @@ JFileChooser FileChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel waitLabel;
+    public static javax.swing.JLabel waitLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,7 +29,7 @@ public class Sequentie {
             this.seqID = seqID;
             //System.out.println("seq gemaakt");
             new GUIopen().waitLabel.setText("is aan het openen..");
-            Logica.makeFrames(this.seq);
+            new Logica().makeFrames(this.seq);
             new GUIopen().waitLabel.setText("is aan het openen....");
             //System.out.println("frames gemaakt");
         } else {

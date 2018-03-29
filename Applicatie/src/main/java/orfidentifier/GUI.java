@@ -194,8 +194,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void BLASTbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLASTbuttonActionPerformed
         String seq = "AAALL";
-        String path = Logica.BLAST(seq);
-        ArrayList<Object[]> res = Logica.BLASTparser(path);
+        String path = new Logica().BLAST(seq);
+        ArrayList<Object[]> res = new Logica().BLASTparser(path);
         DefaultTableModel model = (DefaultTableModel) BLASTtable.getModel();
         for(Object[] row: res){
             model.addRow(row);
@@ -211,7 +211,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void ORFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ORFButtonActionPerformed
         waitLabel.setText("is orf's aan het maken..");
-        Logica.findORF();
+        new Logica().findORF();
         int count = 0;
         for (ORF orf:Sequentie.ORFlist){
             String naam = "ORF"+Integer.toString(count);
@@ -265,15 +265,15 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton DownloadButton;
     private javax.swing.JButton ORFButton;
     private javax.swing.JLabel ORFLabel;
-    public javax.swing.JComboBox<String> ORFdropDown;
-    public javax.swing.JTextArea ORFtextArea;
-    public javax.swing.JTextArea SEQtextArea;
+    public static javax.swing.JComboBox<String> ORFdropDown;
+    public static javax.swing.JTextArea ORFtextArea;
+    public static javax.swing.JTextArea SEQtextArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton openButton;
     private javax.swing.JLabel seqLabel;
-    public javax.swing.JLabel waitLabel;
+    public static javax.swing.JLabel waitLabel;
     // End of variables declaration//GEN-END:variables
 }
