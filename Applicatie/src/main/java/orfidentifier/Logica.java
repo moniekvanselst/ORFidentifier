@@ -117,7 +117,7 @@ public class Logica {
         String stop2 = "TAG";
         String stop3 = "TGA";
         for (String sequ : seqframeMap.values()) {
-            new GUI().waitLabel.setText("is aan het openen....");
+            GUI.waitLabel.setText("is aan het openen....");
             System.out.println("drie");
             int a = sequ.length() % 3;
             sequ = sequ.substring(0, sequ.length() - a);

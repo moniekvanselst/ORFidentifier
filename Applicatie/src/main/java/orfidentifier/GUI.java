@@ -210,7 +210,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ORFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ORFButtonActionPerformed
-        waitLabel.setText("is orf's aan het maken..");
+        GUI.waitLabel.setText("is orf's aan het maken..");
         new Logica().findORF();
         int count = 0;
         for (ORF orf:Sequentie.ORFlist){
