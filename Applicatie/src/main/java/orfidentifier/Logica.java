@@ -68,6 +68,7 @@ public class Logica {
                     firstline = false;
                 }
             }
+            new GUIopen().waitLabel.setText("is aan het openen....");
             sequentie = sequentie.toUpperCase();
             Sequentie seqObject = new Sequentie(sequentie, seqID);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException exc) {
@@ -116,6 +117,7 @@ public class Logica {
         String stop2 = "TAG";
         String stop3 = "TGA";
         for (String sequ : seqframeMap.values()) {
+            new GUI().waitLabel.setText("is aan het openen....");
             System.out.println("drie");
             int a = sequ.length() % 3;
             sequ = sequ.substring(0, sequ.length() - a);
@@ -135,9 +137,10 @@ public class Logica {
                         startpositie = sequ.indexOf(orf);
                         System.out.println("sez . vijf");
                         ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
-                        //Sequentie.ORFlist.add(new ORF(frame, startpositie, eindpositie, orf));
+                        Sequentie.ORFlist.add(orfObject);
+                        new GUI().ORFtextArea.append("ORF "+i+": "+orfObject.getSeqorf()+"/n");
+                        new GUI().ORFdropDown.addItem("ORF"+i);
                         System.out.println("zeven");
-                        //ORF orfObject = new ORF(frame, startpositie, eindpositie, orf);
                     }
                     orf = "";
                     System.out.println("acht");

@@ -38,12 +38,12 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        SEQtextArea = new javax.swing.JTextArea();
         seqLabel = new javax.swing.JLabel();
         ORFLabel = new javax.swing.JLabel();
         ORFButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        ORFtextArea = new javax.swing.JTextArea();
         openButton = new javax.swing.JButton();
         ORFdropDown = new javax.swing.JComboBox<>();
         DownloadButton = new javax.swing.JButton();
@@ -52,12 +52,13 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         BLASTtable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        waitLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        SEQtextArea.setColumns(20);
+        SEQtextArea.setRows(5);
+        jScrollPane1.setViewportView(SEQtextArea);
 
         seqLabel.setText("Sequence:");
 
@@ -70,9 +71,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        ORFtextArea.setColumns(20);
+        ORFtextArea.setRows(5);
+        jScrollPane2.setViewportView(ORFtextArea);
 
         openButton.setText("Open file");
         openButton.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +120,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        waitLabel.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,6 +140,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(seqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(waitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(openButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -156,7 +161,8 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seqLabel)
-                    .addComponent(openButton))
+                    .addComponent(openButton)
+                    .addComponent(waitLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,13 +210,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ORFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ORFButtonActionPerformed
+        waitLabel.setText("is orf's aan het maken..");
         Logica.findORF();
         int count = 0;
         for (ORF orf:Sequentie.ORFlist){
             String naam = "ORF"+Integer.toString(count);
             ORFdropDown.addItem(naam);
             count++;
-            jTextArea1.append("/n"+naam+": "+orf.getSeqorf());
+            SEQtextArea.append("/n"+naam+": "+orf.getSeqorf());
         }
     }//GEN-LAST:event_ORFButtonActionPerformed
 
@@ -259,13 +266,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton ORFButton;
     private javax.swing.JLabel ORFLabel;
     public javax.swing.JComboBox<String> ORFdropDown;
+    public javax.swing.JTextArea ORFtextArea;
+    public javax.swing.JTextArea SEQtextArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JButton openButton;
     private javax.swing.JLabel seqLabel;
+    public javax.swing.JLabel waitLabel;
     // End of variables declaration//GEN-END:variables
 }
